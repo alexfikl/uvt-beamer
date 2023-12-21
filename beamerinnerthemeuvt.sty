@@ -1,0 +1,60 @@
+% SPDX-FileCopyrightText: 2023 Alexandru Fikl <alexfikl@gmail.com>
+% SPDX-License-Identifier: CC-BY-SA-4.0
+
+\def\fileversion{v0.1}
+\def\filedate{2023/12/21}
+
+\NeedsTeXFormat{LaTeX2e}
+\ProvidesPackage{beamerinnerthemeuvt}[\filedate \fileversion UVT Beamer Inner Theme]
+
+% <<< templates
+
+\setbeamertemplate{background}[blank]
+
+\NewDocumentCommand \titleframe {} {
+  \setbeamertemplate{title page}[uvttitle]
+  \setbeamertemplate{background}[uvtgradient]
+  \frame[plain,noframenumbering]{\titlepage}
+  \setbeamertemplate{background}[blank]
+}
+
+% >>>
+
+% <<< styles
+
+\defbeamertemplate{title page}{uvttitle}
+{
+    \vfill
+    \begin{center}
+        % title format
+        \usebeamerfont{title}\usebeamercolor[fg]{title}
+        \inserttitle\par
+        % subtitle
+        \usebeamerfont{subtitle}\insertsubtitle\par%
+        \bigskip
+        % author
+        \usebeamerfont{author}\insertauthor\par%
+        \bigskip
+        \usebeamerfont{date}\insertdate%
+    \end{center}
+}
+
+\defbeamertemplate{background}{uvtgradient}
+{
+    \begin{tikzpicture}[remember picture, overlay]
+        \node [shading=axis,
+               rectangle,
+               left color=UVTDarkBlue,
+               right color=UVTLightBlue,
+               shading angle=45,
+               anchor=north,
+               minimum width=\paperwidth, minimum height=\paperheight]
+               (box) at (current page.north) {};
+    \end{tikzpicture}
+}
+
+\defbeamertemplate{background}{blank}{}
+
+% >>>
+
+%% vim: foldmarker=<<<,>>>:foldmethod=marker:nospell:filetype=tex

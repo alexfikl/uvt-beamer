@@ -1,0 +1,59 @@
+% SPDX-FileCopyrightText: 2023 Alexandru Fikl <alexfikl@gmail.com>
+% SPDX-License-Identifier: CC-BY-SA-4.0
+%
+% This package reproduces the UVT (West University of Timișoara) Power Point
+% presentation style defined in the visual identity manual.
+%
+% Usage:
+%   \usetheme[options]{uvt}
+%
+% References:
+%   Colors and Logos: https://dci.uvt.ro/identitate-vizuala
+%
+% Acknowledgement:
+%   The skeleton of this style file was copied from
+%   https://github.com/lukeolson/illinois-letterhead
+%   though little of it remains.
+
+\def\fileversion{v0.1}
+\def\filedate{2023/12/21}
+
+\NeedsTeXFormat{LaTeX2e}
+\ProvidesPackage{beamerthemeuvt}[\filedate \fileversion UVT Beamer Theme]
+
+% <<< options
+
+\RequirePackage{iftex}
+\RequirePackage{kvoptions}
+\SetupKeyvalOptions{
+    family=uvt,
+    prefix=uvt@
+}
+
+% enable Myriad Pro
+\DeclareBoolOption[false]{nomyriadpro}
+
+\usecolortheme{uvt}
+\useinnertheme{uvt}
+\useoutertheme{uvt}
+\usefonttheme{uvt}
+
+\ProcessOptionsBeamer
+\DeclareDefaultOption{\PackageWarning{beamerthemeuvt}{Unknown option `\CurrentOption`}}
+\ProcessKeyvalOptions*
+
+% >>>
+
+% <<< packages
+
+% fancy graphics
+\RequirePackage{tikz}
+% handle string keyval options
+\RequirePackage{ifthen}
+
+% nicer command definitions
+\RequirePackage{xparse}
+
+% >>>
+
+%% vim: foldmarker=<<<,>>>:foldmethod=marker:nospell:filetype=tex
