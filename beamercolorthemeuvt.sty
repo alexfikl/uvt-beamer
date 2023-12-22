@@ -7,6 +7,8 @@
 \NeedsTeXFormat{LaTeX2e}
 \ProvidesPackage{beamercolorthemeuvt}[\filedate \fileversion UVT Beamer Color Theme]
 
+% <<< colors
+
 % NOTE: https://dci.uvt.ro/identitate-vizuala
 \definecolor{UVTLightBlue}{RGB}{52, 113, 183}
 \definecolor{UVTDarkBlue}{RGB}{3, 75, 119}
@@ -15,5 +17,19 @@
 % NOTE: taken from the document itself
 \definecolor{UVTBeamerBlue}{RGB}{195, 232, 251}
 \definecolor{UVTBeamerGray}{RGB}{246, 246, 246}
+
+% >>>
+
+% <<< styles
+
+\setbeamercolor{title}{fg=white, bg= , parent=normal text}
+\setbeamercolor{titlelike}{use=title, parent=title}
+\setbeamercolor{author}{use=normal text, bg= , parent=normal text}
+\setbeamercolor{date}{use=normal text, bg= , parent=normal text}
+\setbeamercolor{institute}{use=normal text, parent=normal text}
+
+\setbeamercolor{footline hline}{bg=UVTBeamerGray}
+
+% >>>
 
 %% vim: foldmarker=<<<,>>>:foldmethod=marker:nospell:filetype=tex

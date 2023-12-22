@@ -7,4 +7,30 @@
 \NeedsTeXFormat{LaTeX2e}
 \ProvidesPackage{beamerouterthemeuvt}[\filedate \fileversion UVT Beamer Outer Theme]
 
+% <<< styles
+
+\defbeamertemplate*{headline}{uvtframe}{
+    \begin{beamercolorbox}[wd=\textwidth]{footline}%
+        \hfill
+        \includegraphics[width=0.2\paperwidth]{assets/uvt-logo}
+    \end{beamercolorbox}
+}
+
+
+\defbeamertemplate{footline}{uvtframe}{%
+    \begin{beamercolorbox}[wd=\textwidth, ht=2.5ex]{footline hline}%
+    \hfill {www.uvt.ro}
+    \hspace{20pt}
+    \vspace*{0.75ex}
+    \end{beamercolorbox}
+    \begin{beamercolorbox}[wd=\textwidth, sep=5pt]{footline}%
+        \centering
+        \usebeamertemplate*{frame footer}
+        \insertframenumber/\inserttotalframenumber
+    \end{beamercolorbox}%
+}
+\setbeamertemplate{footline}[uvtframe]
+
+% >>>
+
 %% vim: foldmarker=<<<,>>>:foldmethod=marker:nospell:filetype=tex

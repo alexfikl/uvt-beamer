@@ -9,20 +9,20 @@
 
 % <<< templates
 
-\setbeamertemplate{background}[blank]
+\setbeamertemplate{background}[uvtslide]
 
 \NewDocumentCommand \titleframe {} {
-  \setbeamertemplate{title page}[uvttitle]
-  \setbeamertemplate{background}[uvtgradient]
+  \setbeamertemplate{title page}[uvttitlepage]
+  \setbeamertemplate{background}[uvttitlepage]
   \frame[plain,noframenumbering]{\titlepage}
-  \setbeamertemplate{background}[blank]
+  \setbeamertemplate{background}[uvtslide]
 }
 
 % >>>
 
 % <<< styles
 
-\defbeamertemplate{title page}{uvttitle}
+\defbeamertemplate{title page}{uvttitlepage}
 {
     \vfill
     \begin{center}
@@ -39,7 +39,7 @@
     \end{center}
 }
 
-\defbeamertemplate{background}{uvtgradient}
+\defbeamertemplate{background}{uvttitlepage}
 {
     \begin{tikzpicture}[remember picture, overlay]
         \node [shading=axis,
@@ -50,10 +50,17 @@
                anchor=north,
                minimum width=\paperwidth, minimum height=\paperheight]
                (box) at (current page.north) {};
+        \node [opacity=0.5] at (current page.center)
+            {\includegraphics[width=0.4\paperwidth]{assets/uvt-background-logo-white}};
     \end{tikzpicture}
 }
 
-\defbeamertemplate{background}{blank}{}
+\defbeamertemplate{background}{uvtslide}{
+    \begin{tikzpicture}[remember picture, overlay]
+        \node [opacity=0.025] at (current page.center)
+            {\includegraphics[width=0.4\paperwidth]{assets/uvt-background-logo-black}};
+    \end{tikzpicture}
+}
 
 % >>>
 

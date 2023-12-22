@@ -7,6 +7,10 @@ TEX_THEME_STY_FILES=\
 	beamerfontthemeuvt.sty \
 	beamerinnerthemeuvt.sty \
 	beamerouterthemeuvt.sty
+TEX_THEME_ASSETS=\
+	assets/template-titlepage.png \
+	assets/template-slide.png \
+	assets/uvt-background-logo-white.png
 
 all: template assets
 
@@ -19,7 +23,7 @@ help: 								## Show this help
 template: template.pdf				## Compile template example
 .PHONY: template
 
-assets: assets/template-titlepage.png assets/template-frame.png	## Compile assets for example
+assets: $(TEX_THEME_ASSETS)			## Compile assets for example
 .PHONY: template
 
 clean:								## Remove temporary compilation files
@@ -28,7 +32,7 @@ clean:								## Remove temporary compilation files
 .PHONY: clean
 
 purge: clean						## Remove all generated files
-	rm -rf template.pdf assets/template.png
+	rm -rf template.pdf $(TEX_THEME_ASSETS)
 .PHONY: purge
 
 template.pdf: template.tex $(TEX_THEME_STY_FILES)
@@ -46,7 +50,7 @@ assets/template-titlepage.png: template.pdf
 		-sharpen 0x1.0 \
 		$@
 
-assets/template-frame.png: template.pdf
+assets/template-slide.png: template.pdf
 	convert \
 		-verbose \
 		-density 300 \
@@ -56,3 +60,6 @@ assets/template-frame.png: template.pdf
 		-flatten \
 		-sharpen 0x1.0 \
 		$@
+
+assets/uvt-background-logo-white.png: assets/uvt-background-logo-black.png
+	convert $< -channel RGB -negate +channel $@
