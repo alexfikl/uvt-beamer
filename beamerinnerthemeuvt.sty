@@ -89,6 +89,34 @@
 
 % >>>
 
+% <<< itemize / enumerate
+
+\setbeamertemplate{itemize item}{
+    \tikz{
+        \draw[fill=UVTOrange, draw=none] (0, 0) rectangle (0.1, 0.1);
+        \draw[fill=UVTOrange, draw=none] (0.1, 0.1) rectangle (0.2, 0.2);
+        \draw[fill=UVTOrange, draw=none] (0, 0.2) rectangle (0.1, 0.3);
+    }
+}
+
+\setbeamertemplate{itemize subitem}{
+    \tikz{
+        \draw[fill=UVTDarkBlue, draw=none] (0, 0) rectangle (0.075, 0.075);
+        \draw[fill=UVTDarkBlue, draw=none] (0.075, 0.075) rectangle (0.15, 0.15);
+        \draw[fill=UVTDarkBlue, draw=none] (0, 0.15) rectangle (0.075, 0.225);
+    }
+}
+
+\setbeamertemplate{itemize subsubitem}{
+    \tikz{
+        \draw[fill=white, draw=none] (0, 0) rectangle (0.075, 0.075);
+        \draw[fill=UVTLightBlue, draw=none] (0.075, 0.075) rectangle (0.15, 0.15);
+        \draw[fill=white, draw=none] (0, 0.15) rectangle (0.075, 0.225);
+    }
+}
+
+% >>>
+
 % <<< blocks
 
 \setbeamertemplate{block begin}{
@@ -129,6 +157,14 @@
             \usebeamerfont*{block text}
 }
 \setbeamertemplate{block example end}{\end{tabular}\end{adjustbox}}
+
+% >>>
+
+% <<< figures
+
+% % disable "Figure:" in the captions
+% \setbeamertemplate{caption}{\tiny\insertcaption}
+% \setbeamertemplate{caption label separator}{}
 
 % >>>
 

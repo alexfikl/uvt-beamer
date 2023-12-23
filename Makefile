@@ -10,9 +10,6 @@ TEX_THEME_STY_FILES=\
 TEX_THEME_ASSETS=\
 	assets/uvt-motto.png \
 	assets/uvt-background-logo-white.png
-TEX_THEME_TEMPLATE=\
-	assets/template-titlepage.png \
-	assets/template-slide.png
 
 all: assets template
 
@@ -22,7 +19,7 @@ help: 								## Show this help
 	@echo ""
 .PHONY: help
 
-template: template.pdf $(TEX_THEME_TEMPLATE)	## Compile template example
+template: template.pdf assets/template.png	## Compile template example
 .PHONY: template
 
 assets: $(TEX_THEME_ASSETS)			## Compile assets
@@ -45,27 +42,14 @@ uvt-motto.pdf: uvt-motto.tex
 	$(TEXMK) $(TEXFLAGS) $<
 	$(TEXMK) $(TEXFLAGS) $<
 
-assets/template-titlepage.png: template.pdf
+assets/template-00.png: template.pdf
 	convert \
 		-verbose \
 		-density 300 \
-		-trim \
-		$<[0] \
+		$< \
 		-quality 100 \
-		-flatten \
 		-sharpen 0x1.0 \
-		$@
-
-assets/template-slide.png: template.pdf
-	convert \
-		-verbose \
-		-density 300 \
-		-trim \
-		$<[1] \
-		-quality 100 \
-		-flatten \
-		-sharpen 0x1.0 \
-		$@
+		'assets/template-%02d.png'
 
 assets/uvt-background-logo-white.png: assets/uvt-background-logo-black.png
 	convert $< -channel RGB -negate +channel $@
