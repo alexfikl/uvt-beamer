@@ -9,24 +9,42 @@
 
 % <<< styles
 
-\defbeamertemplate*{headline}{uvtframe}{
-    \begin{beamercolorbox}[wd=\textwidth]{footline}%
-        \hfill
-        \includegraphics[width=0.2\paperwidth]{assets/uvt-logo}
+\defbeamertemplate*{frametitle}{uvtframe}{
+    \vspace{-18pt}
+    \begin{beamercolorbox}[wd=\paperwidth, leftskip=0.06\paperwidth]{frametitle}
+        {
+        \usebeamerfont{frametitle}
+        \usebeamercolor[fg]{frametitle}\insertframetitle
+        }\\[-.28cm]
+        \hspace{0.41em}{\usebeamerfont{framesubtitle}\usebeamercolor[fg]{framesubtitle}\insertframesubtitle}%
     \end{beamercolorbox}
 }
 
+\defbeamertemplate*{headline}{uvtframe}{
+    \vspace{-2.5pt}
+    \hfill
+    \includegraphics[width=0.2\paperwidth]{assets/uvt-logo}
+    \hspace{6pt}
+}
 
 \defbeamertemplate{footline}{uvtframe}{%
     \begin{beamercolorbox}[wd=\textwidth, ht=2.5ex]{footline hline}%
-    \hfill {www.uvt.ro}
+    \hfill \includegraphics[width=0.2\paperwidth]{assets/uvt-motto}
+    \hspace{10pt} \vspace*{-6pt}
+
     \hspace{20pt}
-    \vspace*{0.75ex}
+    \usebeamerfont{author in head/foot} \insertshortauthor
+    \hfill \usebeamercolor[fg]{url text} \usebeamerfont{url text}
+    \href{https://www.uvt.ro}{www.uvt.ro}
+    \hspace{24pt}
+    \vspace*{0.75pt}
     \end{beamercolorbox}
     \begin{beamercolorbox}[wd=\textwidth, sep=5pt]{footline}%
         \centering
         \usebeamertemplate*{frame footer}
-        \insertframenumber/\inserttotalframenumber
+        \usebeamercolor[fg]{page number in head/foot}
+        \usebeamerfont{page number in head/foot}
+        \insertframenumber~/~\inserttotalframenumber
     \end{beamercolorbox}%
 }
 \setbeamertemplate{footline}[uvtframe]

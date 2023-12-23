@@ -17,22 +17,30 @@
 % NOTE: taken from the document itself
 \definecolor{UVTBeamerBlue}{RGB}{195, 232, 251}
 \definecolor{UVTBeamerGray}{RGB}{246, 246, 246}
+\definecolor{UVTBeamerDarkGray}{RGB}{182, 182, 182}
 
 % >>>
 
 % <<< styles
 
 \setbeamercolor{title}{fg=white, bg= , parent=normal text}
-\setbeamercolor{titlelike}{use=title, parent=title}
+\setbeamercolor{titlelike}{fg= , bg= , parent=normal text}
 \setbeamercolor{author}{use=normal text, bg= , parent=normal text}
 \setbeamercolor{date}{use=normal text, bg= , parent=normal text}
 \setbeamercolor{institute}{use=normal text, parent=normal text}
+
+\setbeamercolor{section}{use=titlelike}
+\setbeamercolor{frametitle}{fg=UVTDarkBlue, use=titlelike}
+
+\setbeamercolor{page number in head/foot}{fg=UVTBeamerDarkGray}
+\setbeamercolor{url text}{fg=UVTDarkBlue}
 
 \setbeamercolor{block title}{fg=UVTDarkBlue}
 \setbeamercolor{alerted text}{fg=UVTOrange}
 \setbeamercolor{example text}{fg=UVTLightBlue}
 
 \setbeamercolor{footline hline}{bg=UVTBeamerGray}
+\setbeamercolor{header hline}{bg=UVTBeamerGray}
 
 % >>>
 

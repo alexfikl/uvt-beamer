@@ -12,10 +12,20 @@
 \setbeamertemplate{background}[uvtslide]
 
 \NewDocumentCommand \titleframe {} {
-  \setbeamertemplate{title page}[uvttitlepage]
-  \setbeamertemplate{background}[uvttitlepage]
-  \frame[plain,noframenumbering]{\titlepage}
-  \setbeamertemplate{background}[uvtslide]
+    \setbeamertemplate{title page}[uvttitlepage]
+    \setbeamertemplate{background}[uvttitlepage]
+    \frame[plain,noframenumbering]{\titlepage}
+    \setbeamertemplate{background}[uvtslide]
+}
+
+\NewDocumentCommand \sectionframe {} {
+    \setbeamertemplate{section page}[uvtsectionpage]
+    \setbeamertemplate{background}[uvttitlepage]
+    \frame[plain,noframenumbering]{\sectionpage}
+    \setbeamertemplate{background}[uvtslide]
+}
+\AtBeginSection{
+    \sectionframe
 }
 
 % >>>
@@ -39,6 +49,21 @@
     \end{center}
 }
 
+\defbeamertemplate{section page}{uvtsectionpage}
+{
+    \vskip40pt
+    \begin{center}
+        \begin{minipage}[t][][c]{\textwidth}%
+            \centering
+            \usebeamerfont{section title}\usebeamercolor[fg]{section}
+            \insertsectionhead\par
+        \end{minipage}
+    \end{center}
+    \vfill
+}
+
+% <<< background
+
 \defbeamertemplate{background}{uvttitlepage}
 {
     \begin{tikzpicture}[remember picture, overlay]
@@ -61,6 +86,10 @@
             {\includegraphics[width=0.4\paperwidth]{assets/uvt-background-logo-black}};
     \end{tikzpicture}
 }
+
+% >>>
+
+% <<< blocks
 
 \setbeamertemplate{block begin}{
     \vspace{\fill}
@@ -100,6 +129,8 @@
             \usebeamerfont*{block text}
 }
 \setbeamertemplate{block example end}{\end{tabular}\end{adjustbox}}
+
+% >>>
 
 % >>>
 

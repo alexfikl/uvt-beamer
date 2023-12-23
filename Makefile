@@ -8,11 +8,13 @@ TEX_THEME_STY_FILES=\
 	beamerinnerthemeuvt.sty \
 	beamerouterthemeuvt.sty
 TEX_THEME_ASSETS=\
-	assets/template-titlepage.png \
-	assets/template-slide.png \
+	assets/uvt-motto.png \
 	assets/uvt-background-logo-white.png
+TEX_THEME_TEMPLATE=\
+	assets/template-titlepage.png \
+	assets/template-slide.png
 
-all: template assets
+all: assets template
 
 help: 								## Show this help
 	@echo -e "Specify a command. The choices are:\n"
@@ -20,11 +22,11 @@ help: 								## Show this help
 	@echo ""
 .PHONY: help
 
-template: template.pdf				## Compile template example
+template: template.pdf $(TEX_THEME_TEMPLATE)	## Compile template example
 .PHONY: template
 
-assets: $(TEX_THEME_ASSETS)			## Compile assets for example
-.PHONY: template
+assets: $(TEX_THEME_ASSETS)			## Compile assets
+.PHONY: assets
 
 clean:								## Remove temporary compilation files
 	rm -rf latex.out \
@@ -32,10 +34,14 @@ clean:								## Remove temporary compilation files
 .PHONY: clean
 
 purge: clean						## Remove all generated files
-	rm -rf template.pdf $(TEX_THEME_ASSETS)
+	rm -rf template.pdf $(TEX_THEME_ASSETS) $(TEX_THEME_TEMPLATE)
 .PHONY: purge
 
 template.pdf: template.tex $(TEX_THEME_STY_FILES)
+	$(TEXMK) $(TEXFLAGS) $<
+	$(TEXMK) $(TEXFLAGS) $<
+
+uvt-motto.pdf: uvt-motto.tex
 	$(TEXMK) $(TEXFLAGS) $<
 	$(TEXMK) $(TEXFLAGS) $<
 
@@ -63,3 +69,16 @@ assets/template-slide.png: template.pdf
 
 assets/uvt-background-logo-white.png: assets/uvt-background-logo-black.png
 	convert $< -channel RGB -negate +channel $@
+
+assets/uvt-motto.png: uvt-motto.pdf
+	convert \
+		-verbose \
+		-density 300 \
+		-background transparent \
+		-flatten \
+		-trim \
+		$< \
+		-quality 100 \
+		-sharpen 0x1.0 \
+		$@
+	convert $@ -crop 710x165+535+525 $@
