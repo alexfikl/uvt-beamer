@@ -31,7 +31,6 @@ fonts that resemble Myriad Pro better.
 ![slidepage2](assets/template-02.png "Slide Page 2")
 ![slidepage3](assets/template-03.png "Slide Page 3")
 ![slidepage4](assets/template-04.png "Slide Page 4")
-![slidepage5](assets/template-05.png "Slide Page 5")
 
 ## License
 

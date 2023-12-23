@@ -19,7 +19,7 @@ help: 								## Show this help
 	@echo ""
 .PHONY: help
 
-template: template.pdf assets/template.png	## Compile template example
+template: template.pdf assets/template-00.png	## Compile template example
 .PHONY: template
 
 assets: $(TEX_THEME_ASSETS)			## Compile assets
@@ -31,7 +31,7 @@ clean:								## Remove temporary compilation files
 .PHONY: clean
 
 purge: clean						## Remove all generated files
-	rm -rf template.pdf $(TEX_THEME_ASSETS) $(TEX_THEME_TEMPLATE)
+	rm -rf template.pdf $(TEX_THEME_ASSETS) assets/template-*.png
 .PHONY: purge
 
 template.pdf: template.tex $(TEX_THEME_STY_FILES)
@@ -43,6 +43,7 @@ uvt-motto.pdf: uvt-motto.tex
 	$(TEXMK) $(TEXFLAGS) $<
 
 assets/template-00.png: template.pdf
+	@rm -rf assets/template-*.png
 	convert \
 		-verbose \
 		-density 300 \
@@ -65,4 +66,4 @@ assets/uvt-motto.png: uvt-motto.pdf
 		-quality 100 \
 		-sharpen 0x1.0 \
 		$@
-	convert $@ -crop 710x165+535+525 $@
+	convert $@ -crop 790x165+535+525 $@
