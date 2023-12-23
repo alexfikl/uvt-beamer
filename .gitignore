@@ -39,6 +39,7 @@
 *.synctex.gz
 *.synctex.gz(busy)
 *.pdfsync
+*.kilepr
 
 ## Build tool directories for auxiliary files
 # latexrun
