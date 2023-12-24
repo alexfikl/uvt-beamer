@@ -23,6 +23,7 @@ The package defines the following options used as `\usetheme[opts]{uvt}`.
 | Option                            | Description                           |
 | :-                                | :-                                    |
 | `nomyriadpro`                     | Do not load the *Myriad Pro* fonts    |
+| `language=<lang>`                 | One of *english* or *romanian*        |
 | `layoutgrid`                      | Adds a debug grid to check alignment  |
 
 ## Fonts
