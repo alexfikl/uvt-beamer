@@ -11,9 +11,13 @@
 
 \defbeamertemplate*{frametitle}{uvtframe}{
     \vspace{-18pt}
-    \begin{beamercolorbox}[wd=\paperwidth, leftskip=0.06\paperwidth]{frametitle}
-        {\usebeamerfont{frametitle}\usebeamercolor[fg]{frametitle}\insertframetitle}\\[-.28cm]%
-        {\usebeamerfont{framesubtitle}\usebeamercolor[fg]{framesubtitle}\insertframesubtitle}%
+    \begin{beamercolorbox}[wd=\paperwidth, leftskip=0.05\paperwidth]{frametitle}
+        \ifx\insertframesubtitle\empty
+        {\vspace{10pt}\usebeamerfont{frametitle}\usebeamercolor[fg]{frametitle}\insertframetitle}
+        \else
+        {\usebeamerfont{frametitle}\usebeamercolor[fg]{frametitle}\insertframetitle}\\[-7pt]
+        {\usebeamerfont{framesubtitle}\usebeamercolor[fg]{framesubtitle}\insertframesubtitle}
+        \fi
     \end{beamercolorbox}
 }
 
@@ -21,15 +25,16 @@
     \vspace{-2.5pt}
     \hfill
     \includegraphics[width=0.2\paperwidth]{assets/uvt-logo}
-    \hspace{6pt}
+    \hspace{15pt}
 }
 
 \defbeamertemplate{footline}{uvtframe}{%
+    \vspace{5pt}
     \begin{beamercolorbox}[wd=\textwidth, ht=2.5ex]{footline hline}%
     \hfill \includegraphics[width=0.2\paperwidth]{assets/uvt-motto}
     \hspace{7pt} \vspace*{-6pt}
 
-    \hspace{20pt}
+    \hspace{15pt}
     \usebeamerfont{author in head/foot} \insertshortauthor
     \hfill \usebeamercolor[fg]{url text} \usebeamerfont{url text}
     \href{https://www.uvt.ro}{www.uvt.ro}

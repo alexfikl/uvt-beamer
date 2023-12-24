@@ -27,29 +27,73 @@
 
 \titleframe
 
-\begin{frame}{Example Frame}
-\framesubtitle{Example Subtitle with Explanation That Can be a Lot Longer}
+\begin{frame}{UVT Theme}
+\framesubtitle{A short introduction to the West University of Timișoara Theme}
+
+The \textbf{UVT Theme} (used as \texttt{\textbackslash usetheme\{uvt\}}) is a
+modern theme for Beamer based on the official
+\textcolor{UVTLightBlue}{UVT branding}\footnotemark[1]. Some
+of its elements and styling are inspired by \textcolor{UVTLightBlue}{Trigon}
+theme\footnotemark[2].
+
+\bigskip
+It comes with a few nifty features:
+\begin{itemize}
+    \item Use of the official color scheme for UVT throughout.
+    \item Customized environments.
+    \item As close as possible to the official template.
+\end{itemize}
+
+\bigskip
+Separate parts are available as e.g. \texttt{\textbackslash usecolortheme\{uvt\}}!
+
+\footnotetext[1]{\url{https://dci.uvt.ro/identitate-vizuala}}
+\footnotetext[2]{\url{https://gitlab.com/thlamb/beamertheme-trigon}}
 \end{frame}
 
 \section{Blocks}
 
-\begin{frame}{Example Frame: Blocks}
+\begin{frame}{UVT Theme: Colors and Fonts}
+
+This theme uses the \emph{Myriad Pro} font. This is a clean \emph{sans serif}
+font from Adobe that is recommended by the official UVT branding.
+
+\bigskip
+The theme has three standard colors:
+\begin{itemize}
+    \item A nice \textcolor{UVTLightBlue}{\textbf{light blue}} (\texttt{UVTLightBlue}).
+    \item A bolder \textcolor{UVTDarkBlue}{\textbf{dark blue}} (\texttt{UVTDarkBlue}).
+    \item An attention grabbing \textcolor{UVTOrange}{\textbf{orange}}
+    (\texttt{UVTOrange})!
+    \item Variants \texttt{color!x} can also be used to darken or lighten them
+\end{itemize}
+
+\bigskip
+These can be used for emphasizing \textcolor{UVTLightBlue}{text} or for
+more obvious \alert{alerts}. Standard \textbf{bold} and \textit{italic} emphasis
+can of course also be used!
+\end{frame}
+
+\begin{frame}{UVT Theme: Blocks}
+
+We have various standard Beamer blocks styled in a pleasing fashion.
+
 \begin{block}{Block 1}
-Some block text
+Some block block.
 \end{block}
 
 \begin{alertblock}{Alert 1}
-Some block text
+Some alert block.
 \end{alertblock}
 
 \begin{exampleblock}{Example 1}
-Some example
+Some example block.
 \end{exampleblock}
 \end{frame}
 
-\begin{frame}{Example Frame: Lists}
+\begin{frame}{UVT Theme: Lists}
 \small
-\textbf{Paragraph}
+\textbf{Itemize}
 
 \begin{itemize}
     \item Itemize lists are nicely customized ...
@@ -68,6 +112,14 @@ Some example
     \item Many things!
     \item It's great!
 \end{enumerate}
+
+\textbf{Description}
+
+\begin{description}
+    \item[UVT] And describe our university in exquisite detail, so that we
+        can capture all its multiline greatness!
+\end{description}
+
 \end{frame}
 
 \end{document}
