@@ -19,38 +19,39 @@ help: 								## Show this help
 	@echo ""
 .PHONY: help
 
-template: template.pdf assets/template-00.png	## Compile template example
+template: template.pdf images/template-00.png	## Compile template example
 .PHONY: template
 
 assets: $(TEX_THEME_ASSETS)			## Compile assets
 .PHONY: assets
 
 clean:								## Remove temporary compilation files
-	rm -rf latex.out \
+	rm -rf latex.out images/latex.out
 	rm -rf *.aux *.log *.out
 .PHONY: clean
 
 purge: clean						## Remove all generated files
-	rm -rf template.pdf $(TEX_THEME_ASSETS) assets/template-*.png
+	rm -rf template.pdf $(TEX_THEME_ASSETS) images/template-*.png
+	rm -rf images/*.pdf
 .PHONY: purge
 
 template.pdf: template.tex $(TEX_THEME_STY_FILES)
 	$(TEXMK) $(TEXFLAGS) $<
 	$(TEXMK) $(TEXFLAGS) $<
 
-uvt-motto.pdf: uvt-motto.tex
-	$(TEXMK) $(TEXFLAGS) $<
-	$(TEXMK) $(TEXFLAGS) $<
+uvt-motto.pdf: images/uvt-motto.tex
+	$(TEXMK) $(TEXFLAGS) --latex-cmd xelatex $<
+	$(TEXMK) $(TEXFLAGS) --latex-cmd xelatex $<
 
-assets/template-00.png: template.pdf
-	@rm -rf assets/template-*.png
+images/template-00.png: template.pdf
+	@rm -rf images/template-*.png
 	convert \
 		-verbose \
 		-density 300 \
 		$< \
 		-quality 100 \
 		-sharpen 0x1.0 \
-		'assets/template-%02d.png'
+		'images/template-%02d.png'
 
 assets/uvt-background-logo-white.png: assets/uvt-background-logo-black.png
 	convert $< -channel RGB -negate +channel $@
