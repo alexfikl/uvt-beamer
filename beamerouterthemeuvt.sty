@@ -7,6 +7,35 @@
 \NeedsTeXFormat{LaTeX2e}
 \ProvidesPackage{beamerouterthemeuvt}[\filedate \fileversion UVT Beamer Outer Theme]
 
+% <<< options
+
+\RequirePackage{kvoptions}
+\SetupKeyvalOptions{
+    family=uvt,
+    prefix=uvt@outer@
+}
+
+\DeclareStringOption[english]{language}
+
+\ProcessOptionsBeamer
+\DeclareDefaultOption{\PackageWarning{beamerouterthemeuvt}{Unknown option `\CurrentOption`}}
+\ProcessKeyvalOptions*
+
+\ifthenelse{\equal{\uvt@outer@language}{english}}{
+    \def\uvt@outer@headerlogo{assets/uvt-logo-en}
+    \def\uvt@outer@motto{assets/uvt-motto-en}
+    \def\uvt@outer@mottospacing{\hspace{0.75\beamer@rightmargin}\vspace*{-6pt}}
+}{
+\ifthenelse{\equal{\uvt@outer@language}{romanian}}{
+    \def\uvt@outer@headerlogo{assets/uvt-logo-ro}
+    \def\uvt@outer@motto{assets/uvt-motto-ro}
+    \def\uvt@outer@mottospacing{\hspace{1.05\beamer@rightmargin}\vspace*{-10pt}}
+}{
+    \PackageError{beamerinnerthemeuvt}{Unknown language `\uvt@inner@language`}{}
+}}
+
+% >>>
+
 % <<< styles
 
 \defbeamertemplate*{frametitle}{uvtframe}{
@@ -24,15 +53,15 @@
 \defbeamertemplate*{headline}{uvtframe}{
     \vspace{-2.5pt}
     \hfill
-    \includegraphics[width=0.2\paperwidth]{assets/uvt-logo}
+    \includegraphics[width=0.2\paperwidth]{\uvt@outer@headerlogo}
     \hspace{\beamer@rightmargin}
 }
 
 \defbeamertemplate{footline}{uvtframe}{%
     \vspace{5pt}
     \begin{beamercolorbox}[wd=\textwidth, ht=2.5ex]{footline hline}%
-    \hfill \includegraphics[width=0.2\paperwidth]{assets/uvt-motto}
-    \hspace{0.5\beamer@rightmargin} \vspace*{-6pt}
+    \hfill \includegraphics[width=0.2\paperwidth]{\uvt@outer@motto}
+    \uvt@outer@mottospacing
 
     \hspace{\beamer@leftmargin}%
     \usebeamerfont{author in head/foot}\insertshortauthor%

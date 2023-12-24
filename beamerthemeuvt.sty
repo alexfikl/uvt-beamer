@@ -31,14 +31,19 @@
 
 % enable Myriad Pro
 \DeclareBoolOption[false]{nomyriadpro}
+\DeclareStringOption[english]{language}
 
 \ProcessOptionsBeamer
 \DeclareDefaultOption{\PackageWarning{beamerthemeuvt}{Unknown option `\CurrentOption`}}
 \ProcessKeyvalOptions*
 
 \usecolortheme{uvt}
-\useinnertheme{uvt}
-\useoutertheme{uvt}
+\useinnertheme[
+    language=\uvt@language
+    ]{uvt}
+\useoutertheme[
+    language=\uvt@language
+    ]{uvt}
 \usefonttheme[
     \ifuvt@nomyriadpro nomyriadpro,\else\fi
     ]{uvt}

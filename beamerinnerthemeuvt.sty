@@ -7,6 +7,34 @@
 \NeedsTeXFormat{LaTeX2e}
 \ProvidesPackage{beamerinnerthemeuvt}[\filedate \fileversion UVT Beamer Inner Theme]
 
+% <<< options
+
+\RequirePackage{ifthen}
+\RequirePackage{kvoptions}
+\SetupKeyvalOptions{
+    family=uvt,
+    prefix=uvt@inner@
+}
+
+\DeclareStringOption[english]{language}
+
+\ProcessOptionsBeamer
+\DeclareDefaultOption{\PackageWarning{beamerinnerthemeuvt}{Unknown option `\CurrentOption`}}
+\ProcessKeyvalOptions*
+
+\ifthenelse{\equal{\uvt@inner@language}{english}}{
+    \def\uvt@inner@whitelogo{assets/uvt-background-logo-white-en}
+    \def\uvt@inner@blacklogo{assets/uvt-background-logo-black-en}
+}{
+\ifthenelse{\equal{\uvt@inner@language}{romanian}}{
+    \def\uvt@inner@whitelogo{assets/uvt-background-logo-white-ro}
+    \def\uvt@inner@blacklogo{assets/uvt-background-logo-black-ro}
+}{
+    \PackageError{beamerinnerthemeuvt}{Unknown language `\uvt@inner@language`}{}
+}}
+
+% >>>
+
 % <<< templates
 
 \setbeamertemplate{background}[uvtslide]
@@ -76,14 +104,14 @@
                minimum width=\paperwidth, minimum height=\paperheight]
                (box) at (current page.north) {};
         \node [opacity=0.5, anchor=north] at (current page.north)
-            {\includegraphics[width=0.35\paperwidth]{assets/uvt-background-logo-white}};
+            {\includegraphics[width=0.35\paperwidth]{\uvt@inner@whitelogo}};
     \end{tikzpicture}
 }
 
 \defbeamertemplate{background}{uvtslide}{
     \begin{tikzpicture}[remember picture, overlay]
         \node [opacity=0.01] at (current page.center)
-            {\includegraphics[width=0.4\paperwidth]{assets/uvt-background-logo-black}};
+            {\includegraphics[width=0.4\paperwidth]{\uvt@inner@blacklogo}};
     \end{tikzpicture}
 }
 
