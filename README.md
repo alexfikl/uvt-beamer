@@ -1,13 +1,29 @@
 # UVT Beamer Theme
 
-This is a reproduction of the UVT (West University of Timișoara) Power Point in
-Latex. It uses the UVT [branding](https://dci.uvt.ro/identitate-vizuala)
+This is a reproduction of the UVT (West University of Timișoara) Power Point
+template in LaTeX. It uses the UVT [branding](https://dci.uvt.ro/identitate-vizuala)
 and is based on the example given in the
 [Official Manual](https://www.dci.uvt.ro/wp-content/uploads/2019/03/MANUAL-IDENTITATE-NEW-WEB-FINAL-2016-.pdf).
+As the example in the official branding manual is not very friendly to scientific
+presentations, this theme will probably take some liberties with it.
 
-This theme is very much a **work in progress** at the moment. As the example in
-the official branding manual is not very friendly to scientific presentations,
-this theme will probably take some liberties with it.
+This template style is fairly complete and working well, but any feature requests
+or bug reports to improve it are **very welcome**!
+
+## How to use it
+
+Copy the `beamerthemeuvt.sty` and the accompanying `sty` files to your local
+directory together with any relevant assets from the `assets` folder. You can also
+use the `template.tex` to get you started with a few useful options and examples.
+Modify `template.tex` as appropriate and build with `pdflatex` (or `xelatex` or
+`lualatex` for the adventurous).
+
+The package defines the following options used as `\usetheme[opts]{uvt}`.
+
+| Option                            | Description                           |
+| :-                                | :-                                    |
+| `nomyriadpro`                     | Do not load the *Myriad Pro* fonts    |
+| `layoutgrid`                      | Adds a debug grid to check alignment  |
 
 ## Fonts
 
@@ -21,6 +37,11 @@ for some reason), it can be disabled with the `nomyriadpro` option. In general,
 we recommend using a free sans serif font instead, e.g `\usepackage{helvet}` for
 the Helvetica look-alike Nimbus Sans L or `\usepackage{paratype}` for the PT Sans
 fonts that resemble Myriad Pro better.
+
+If you are using `XeLaTeX` or `LuaLaTeX`, there are many other nice fonts to
+keep in mind that would work well. For example: Carlito (a Calibri clone),
+Caladea (a Cambria clone), Montserrat (inspired by Gotham), Adobe Source Sans,
+etc. A nice font will always make your presentation look nicer!
 
 ## What it looks like
 

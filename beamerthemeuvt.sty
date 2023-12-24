@@ -23,7 +23,6 @@
 
 % <<< options
 
-\RequirePackage{iftex}
 \RequirePackage{kvoptions}
 \SetupKeyvalOptions{
     family=uvt,
@@ -33,14 +32,16 @@
 % enable Myriad Pro
 \DeclareBoolOption[false]{nomyriadpro}
 
-\usecolortheme{uvt}
-\useinnertheme{uvt}
-\useoutertheme{uvt}
-\usefonttheme{uvt}
-
 \ProcessOptionsBeamer
 \DeclareDefaultOption{\PackageWarning{beamerthemeuvt}{Unknown option `\CurrentOption`}}
 \ProcessKeyvalOptions*
+
+\usecolortheme{uvt}
+\useinnertheme{uvt}
+\useoutertheme{uvt}
+\usefonttheme[
+    \ifuvt@nomyriadpro nomyriadpro,\else\fi
+    ]{uvt}
 
 % >>>
 

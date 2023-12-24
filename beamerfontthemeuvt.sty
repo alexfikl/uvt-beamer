@@ -7,6 +7,24 @@
 \NeedsTeXFormat{LaTeX2e}
 \ProvidesPackage{beamerfontthemeuvt}[\filedate \fileversion UVT Beamer Font Theme]
 
+% <<< options
+
+\RequirePackage{iftex}
+\RequirePackage{kvoptions}
+\SetupKeyvalOptions{
+    family=uvt,
+    prefix=uvt@font@
+}
+
+% enable Myriad Pro
+\DeclareBoolOption[false]{nomyriadpro}
+
+\ProcessOptionsBeamer
+\DeclareDefaultOption{\PackageWarning{beamerfontthemeuvt}{Unknown option `\CurrentOption`}}
+\ProcessKeyvalOptions*
+
+% >>>
+
 % <<< Myriad Pro
 
 \ifpdftex
@@ -15,16 +33,16 @@
     \RequirePackage{fontspec}
 \fi
 
-\ifuvt@nomyriadpro\else
+\ifuvt@font@nomyriadpro\else
     \ifpdftex
         \IfFileExists{MyriadPro.sty}{
             \usepackage[onlytext, smallfamily, lf]{MyriadPro}}{
-            \PackageWarning{uvt-letterhead}{Myriad Pro font is not available to pdfLaTeX. Use the nomyriadpro option to silence this warning.}}
+            \PackageWarning{beamerfontthemeuvt}{Myriad Pro font is not available to pdfLaTeX. Use the nomyriadpro option to silence this warning.}}
     \else
         \IfFontExistsTF{Myriad Pro}{
             \setmainfont[BoldFont={Myriad Pro Semibold}]{Myriad Pro}
             }{
-            \PackageWarning{uvt-letterhead}{Myriad Pro font is not available. Use the nomyriadpro option to silence this warning.}}
+            \PackageWarning{beamerfontthemeuvt}{Myriad Pro font is not available. Use the nomyriadpro option to silence this warning.}}
     \fi
 \fi
 \renewcommand{\familydefault}{\sfdefault}
