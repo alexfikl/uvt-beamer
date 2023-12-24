@@ -21,7 +21,9 @@
             \usepackage[onlytext, smallfamily, lf]{MyriadPro}}{
             \PackageWarning{uvt-letterhead}{Myriad Pro font is not available to pdfLaTeX. Use the nomyriadpro option to silence this warning.}}
     \else
-        \IfFontExistsTF{Myriad Pro}{\setmainfont{Myriad Pro}}{
+        \IfFontExistsTF{Myriad Pro}{
+            \setmainfont[BoldFont={Myriad Pro Semibold}]{Myriad Pro}
+            }{
             \PackageWarning{uvt-letterhead}{Myriad Pro font is not available. Use the nomyriadpro option to silence this warning.}}
     \fi
 \fi

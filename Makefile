@@ -1,5 +1,5 @@
 TEXMK?=latexrun
-TEXFLAGS?=--latex-cmd xelatex -O latex.out
+TEXFLAGS?=--latex-cmd pdflatex -O latex.out
 
 TEX_THEME_STY_FILES=\
 	beamerthemeuvt.sty \
