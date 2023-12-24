@@ -34,7 +34,7 @@
 
 \defbeamertemplate{title page}{uvttitlepage}
 {
-    \vfill
+    \vspace{0.4\paperwidth}
     \begin{center}
         % title format
         \usebeamerfont{title}\usebeamercolor[fg]{title}
@@ -44,18 +44,18 @@
         \bigskip
         % author
         \usebeamerfont{author}\insertauthor\par%
-        \bigskip
         \usebeamerfont{date}\insertdate%
+        \@ifundefined{uvt@venue}{}{\par\usebeamerfont{venue}\uvt@venue}
     \end{center}
 }
 
 \defbeamertemplate{section page}{uvtsectionpage}
 {
-    \vskip40pt
+    \vspace{0.4\paperwidth}
     \begin{center}
         \begin{minipage}[t][][c]{\textwidth}%
             \centering
-            \usebeamerfont{section title}\usebeamercolor[fg]{section}
+            \usebeamerfont{section title}\usebeamercolor[fg]{section title}
             \insertsectionhead\par
         \end{minipage}
     \end{center}
@@ -70,12 +70,12 @@
         \node [shading=axis,
                rectangle,
                left color=UVTDarkBlue,
-               right color=UVTLightBlue,
+               right color=UVTLightBlue!70,
                shading angle=45,
                anchor=north,
                minimum width=\paperwidth, minimum height=\paperheight]
                (box) at (current page.north) {};
-        \node [opacity=0.5] at (current page.center)
+        \node [opacity=0.5, anchor=north] at (current page.north)
             {\includegraphics[width=0.4\paperwidth]{assets/uvt-background-logo-white}};
     \end{tikzpicture}
 }
