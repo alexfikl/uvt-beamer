@@ -57,8 +57,16 @@
     \hspace{\beamer@rightmargin}
 }
 
-\defbeamertemplate{footline}{uvtframe}{%
+\newlength{\uvt@outer@progressbarwidth}
+\defbeamertemplate{footline}{uvtframe}{
+    \uvt@outer@progressbarwidth=\paperwidth
+    \multiply\uvt@outer@progressbarwidth by \insertframenumber
+    \divide\uvt@outer@progressbarwidth by \inserttotalframenumber
     \vspace{5pt}
+    \begin{tikzpicture}[remember picture, overlay]
+    \fill[UVTYellow, anchor=west]
+        (0, -0.3ex) rectangle (\uvt@outer@progressbarwidth, 0ex);
+    \end{tikzpicture}%
     \begin{beamercolorbox}[wd=\textwidth, ht=2.5ex]{footline hline}%
     \hfill \includegraphics[width=0.2\paperwidth]{\uvt@outer@motto}
     \uvt@outer@mottospacing
@@ -69,7 +77,6 @@
     \href{https://www.uvt.ro}{www.uvt.ro}%
     \hspace{1.75\beamer@rightmargin}
     \vspace*{0.75pt}
-
     \end{beamercolorbox}
     \begin{beamercolorbox}[wd=\textwidth, sep=5pt]{footline}%
         \centering
@@ -77,7 +84,7 @@
         \usebeamercolor[fg]{page number in head/foot}
         \usebeamerfont{page number in head/foot}
         \insertframenumber~/~\inserttotalframenumber
-    \end{beamercolorbox}%
+    \end{beamercolorbox}
 }
 \setbeamertemplate{footline}[uvtframe]
 
