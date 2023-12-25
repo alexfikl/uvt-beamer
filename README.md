@@ -49,12 +49,7 @@ etc. A nice font will always make your presentation look nicer!
 
 [Full PDF](template.pdf)
 
-![titlepage](images/template-00.png "Title Page")
-![slidepage1](images/template-01.png "Slide Page 1")
-![slidepage2](images/template-02.png "Slide Page 2")
-![slidepage3](images/template-03.png "Slide Page 3")
-![slidepage4](images/template-04.png "Slide Page 4")
-![slidepage5](images/template-05.png "Slide Page 5")
+![template](images/template.png "Template")
 
 ## License
 

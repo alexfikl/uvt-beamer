@@ -2,6 +2,8 @@
 % remember to set the language is using Romanian
 % \usepackage[romanian]{babel}
 
+\usepackage{booktabs}
+
 % <<< BEGIN theme
 
 \usetheme{uvt}
@@ -124,6 +126,78 @@ Some example block.
     \item[UVT] And describe our university in exquisite detail, so that we
         can capture all its multiline greatness!
 \end{description}
+\end{frame}
+
+\begin{frame}{UVT Theme: Animations}
+
+You can do a standard reveal with \texttt{[<+->]}.
+\bigskip
+
+\begin{itemize}[<+->]
+    \item This is\alert<4>{ really} important.
+    \item Now this.
+    \item And now this.
+\end{itemize}
+
+\visible<4->{
+\pause
+\bigskip
+You can also do an alerted reveal with \texttt{[<+- | alert@+>]}.
+\bigskip
+
+\begin{itemize}[<+- | alert@+>]
+    \item This is important.
+    \item Now this.
+    \item And now this.
+\end{itemize}
+}
+\end{frame}
+
+\begin{frame}{UVT Theme: Figures}
+
+\begin{columns}
+\begin{column}{0.5\textwidth}
+\begin{figure}
+\begin{tikzpicture}
+    % Draw axes
+    \draw [<->,thick] (0,2) node (yaxis) [above] {$y$}
+        |- (3,0) node (xaxis) [right] {$x$};
+    % Draw two intersecting lines
+    \draw (0,0) coordinate (a_1) -- (2,1.8) coordinate (a_2);
+    \draw (0,1.5) coordinate (b_1) -- (2.5,0) coordinate (b_2);
+    % Calculate the intersection of the lines a_1 -- a_2 and b_1 -- b_2
+    % and store the coordinate in c.
+    \coordinate (c) at (intersection of a_1--a_2 and b_1--b_2);
+    % Draw lines indicating intersection with y and x axis. Here we use
+    % the perpendicular coordinate system
+    \draw[dashed] (yaxis |- c) node[left] {$y'$}
+        -| (xaxis -| c) node[below] {$x'$};
+    % Draw a dot to indicate intersection point
+    \fill[UVTYellow] (c) circle (2pt);
+\end{tikzpicture}
+\caption{A simple figure.}
+\end{figure}
+\end{column}
+
+\begin{column}{0.5\textwidth}
+\centering
+\begin{table}
+\caption{Largest cities in the world (source: UN 2018 population estimates
+from Wikipedia)}
+\begin{tabular}{@{} lr @{}}
+    \toprule
+    City & Population\\
+    \midrule
+    Tokyo & 37,468,000 \\
+    Delhi & 28,514,000 \\
+    Shanghai & 25,582,000 \\
+    São Paolo & 21,650,000 \\
+    \bottomrule
+\end{tabular}
+\end{table}
+\end{column}
+\end{columns}
+
 \end{frame}
 
 \end{document}
