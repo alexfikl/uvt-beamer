@@ -31,7 +31,12 @@
 
 % enable Myriad Pro
 \DeclareBoolOption[false]{nomyriadpro}
+% show progressbar in the footer
+\DeclareBoolOption[false]{progressbar}
+% select language for logos
 \DeclareStringOption[english]{language}
+% show a debug layour grid
+\DeclareBoolOption[false]{layoutgrid}
 
 \ProcessOptionsBeamer
 \DeclareDefaultOption{\PackageWarning{beamerthemeuvt}{Unknown option `\CurrentOption`}}
@@ -42,7 +47,8 @@
     language=\uvt@language
     ]{uvt}
 \useoutertheme[
-    language=\uvt@language
+    language=\uvt@language,
+    \ifuvt@progressbar progressbar,\else\fi
     ]{uvt}
 \usefonttheme[
     \ifuvt@nomyriadpro nomyriadpro,\else\fi
@@ -62,6 +68,10 @@
 % used in defining blocks
 \RequirePackage{adjustbox}
 \RequirePackage{colortbl}
+
+\ifuvt@layoutgrid
+    \RequirePackage{showframe}
+\fi
 
 % >>>
 

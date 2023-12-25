@@ -24,6 +24,7 @@ The package defines the following options used as `\usetheme[opts]{uvt}`.
 | :-                                | :-                                    |
 | `nomyriadpro`                     | Do not load the *Myriad Pro* fonts    |
 | `language=<lang>`                 | One of *english* or *romanian*        |
+| `progressbar`                     | Adds a yellow progress bar in the footer |
 | `layoutgrid`                      | Adds a debug grid to check alignment  |
 
 ## Fonts
