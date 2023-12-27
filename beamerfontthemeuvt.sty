@@ -32,16 +32,26 @@
     \RequirePackage{fontspec}
 \fi
 
-\ifuvt@font@nomyriadpro\else
+\newif\ifmyriadproenabled
+\ifuvt@font@nomyriadpro
+    \myriadproenabledfalse
+\else
     \ifpdftex
         \IfFileExists{MyriadPro.sty}{
-            \usepackage[onlytext, smallfamily, lf]{MyriadPro}}{
-            \PackageWarning{beamerfontthemeuvt}{Myriad Pro font is not available to pdfLaTeX. Use the nomyriadpro option to silence this warning.}}
+            \usepackage[onlytext, smallfamily, lf]{MyriadPro}
+            \myriadproenabledtrue
+            }{
+            \PackageWarning{beamerfontthemeuvt}{Myriad Pro font is not available to pdfLaTeX. Use the nomyriadpro option to silence this warning.}
+            \myriadproenabledfalse
+            }
     \else
         \IfFontExistsTF{Myriad Pro}{
             \setmainfont[BoldFont={Myriad Pro Semibold}]{Myriad Pro}
+            \myriadproenabledtrue
             }{
-            \PackageWarning{beamerfontthemeuvt}{Myriad Pro font is not available. Use the nomyriadpro option to silence this warning.}}
+            \PackageWarning{beamerfontthemeuvt}{Myriad Pro font is not available. Use the nomyriadpro option to silence this warning.}
+            \myriadproenabledfalse
+            }
     \fi
 \fi
 \renewcommand{\familydefault}{\sfdefault}
