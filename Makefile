@@ -1,6 +1,6 @@
 TEXMK?=latexrun
 OUTDIR=latex.out
-TEXFLAGS?=--latex-cmd xelatex -O $(OUTDIR)
+TEXFLAGS?=--latex-cmd pdflatex -O $(OUTDIR)
 
 TEX_THEME_STY_FILES=\
 	beamerthemeuvt.sty \
