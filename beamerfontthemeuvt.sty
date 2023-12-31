@@ -46,7 +46,10 @@
             }
     \else
         \IfFontExistsTF{Myriad Pro}{
-            \setmainfont[BoldFont={Myriad Pro Semibold}]{Myriad Pro}
+            \setsansfont{Myriad Pro}[
+                ItalicFont={Myriad Pro Italic},
+                BoldFont={Myriad Pro Bold}
+            ]
             \myriadproenabledtrue
             }{
             \PackageWarning{beamerfontthemeuvt}{Myriad Pro font is not available. Use the nomyriadpro option to silence this warning.}
@@ -54,6 +57,7 @@
             }
     \fi
 \fi
+
 \renewcommand{\familydefault}{\sfdefault}
 
 % >>>
