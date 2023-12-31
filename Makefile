@@ -1,6 +1,6 @@
 TEXMK?=latexrun
 OUTDIR=latex.out
-TEXFLAGS?=--latex-cmd pdflatex -O $(OUTDIR)
+TEXFLAGS?=--latex-cmd xelatex -O $(OUTDIR)
 
 TEX_THEME_STY_FILES=\
 	beamerthemeuvt.sty \
@@ -9,7 +9,7 @@ TEX_THEME_STY_FILES=\
 	beamerinnerthemeuvt.sty \
 	beamerouterthemeuvt.sty
 TEX_THEME_ASSETS=\
-	assets/uvt-motto-en.png \
+	assets/uvt-motto-en.pdf \
 	assets/uvt-background-logo-white-en.png \
 	assets/uvt-background-logo-white-ro.png
 
@@ -37,7 +37,7 @@ purge: clean						## Remove all generated files
 	rm -rf images/*.pdf uvt-motto.pdf
 .PHONY: purge
 
-template.pdf: template.tex $(TEX_THEME_STY_FILES)
+template.pdf: template.tex $(TEX_THEME_STY_FILES) $(TEX_THEME_ASSETS)
 	$(TEXMK) $(TEXFLAGS) $<
 	$(TEXMK) $(TEXFLAGS) $<
 
@@ -63,16 +63,6 @@ assets/uvt-background-logo-white-en.png: assets/uvt-background-logo-black-en.png
 assets/uvt-background-logo-white-ro.png: assets/uvt-background-logo-black-ro.png
 	convert $< -channel RGB -negate +channel $@
 
-assets/uvt-motto-en.png: $(OUTDIR)/uvt-motto.pdf
-	convert \
-		-verbose \
-		-density 300 \
-		-background transparent \
-		-flatten \
-		-trim \
-		$< \
-		-quality 100 \
-		-sharpen 0x1.0 \
-		$(OUTDIR)/uvt-motto.png
-	convert $(OUTDIR)/uvt-motto.png -crop 790x165+535+525 assets/uvt-motto-en.png
-	convert $(OUTDIR)/uvt-motto.png -crop 820x230+535+735 assets/uvt-motto-ro.png
+assets/uvt-motto-en.pdf: $(OUTDIR)/uvt-motto.pdf
+	pdfcrop --margins '0 -50 0 -520' $(OUTDIR)/uvt-motto.pdf assets/uvt-motto-ro.pdf
+	pdfcrop --margins '0 1 0 -581' $(OUTDIR)/uvt-motto.pdf assets/uvt-motto-en.pdf
