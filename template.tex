@@ -2,11 +2,12 @@
 % remember to set the language is using Romanian
 % \usepackage[romanian]{babel}
 
+\usepackage{ifpdf}
 \usepackage{booktabs}
 
 % <<< BEGIN theme
 
-\usetheme{uvt}
+\usetheme[nomyriadpro]{uvt}
 
 % remove navigation symbols
 \beamertemplatenavigationsymbolsempty
@@ -16,7 +17,11 @@
 
 % use a different font
 \ifmyriadproenabled\else
-    \usepackage{helvet}
+    \ifpdftex
+        \usepackage{helvet}
+    \else
+        \setsansfont{Arial}
+    \fi
 \fi
 
 % >>> END
