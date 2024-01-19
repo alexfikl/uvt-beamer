@@ -55,7 +55,10 @@
 }
 
 \defbeamertemplate*{headline}{uvtframe}{
-    \vspace{-2.5pt}
+    \begin{tikzpicture}[remember picture, overlay]
+    \fill[UVTDarkBlue, anchor=west] (0, -0.39) rectangle (0.1, 1);
+    \end{tikzpicture}%
+    \vspace{0pt}
     \hfill
     \includegraphics[width=0.2\paperwidth]{\uvt@outer@headerlogo}
     \hspace{\beamer@rightmargin}
