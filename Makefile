@@ -69,7 +69,7 @@ assets/uvt-motto-en.pdf: $(OUTDIR)/uvt-motto.pdf
 download-logo:					## Download black logos
 	@rm -rf $(LOGOSDIR)
 	@mkdir -p $(LOGOSDIR)
-	curl -o $(LOGOSDIR)/Logos.zip 'https://www.uvt.ro/?jet_download=534'
+	@curl -o $(LOGOSDIR)/Logos.zip 'https://www.uvt.ro/?jet_download=534'
 	7z x -o$(LOGOSDIR) $(LOGOSDIR)/Logos.zip
 	qpdf --empty \
 		--pages '$(LOGOSDIR)/Logo UVT - 2017/Logo UVT - 2017.pdf' 14 -- \
