@@ -1,5 +1,6 @@
 TEXMK?=latexmk
-OUTDIR=latex.out
+OUTDIR?=latex.out
+LOGOSDIR?=logos.out
 TEXFLAGS?=-pdflua -output-directory=$(OUTDIR)
 
 TEX_THEME_STY_FILES=\
@@ -64,3 +65,24 @@ assets/uvt-background-logo-white-ro.png: assets/uvt-background-logo-black-ro.png
 assets/uvt-motto-en.pdf: $(OUTDIR)/uvt-motto.pdf
 	pdfcrop --margins '0 -50 0 -520' $(OUTDIR)/uvt-motto.pdf assets/uvt-motto-ro.pdf
 	pdfcrop --margins '0 1 0 -581' $(OUTDIR)/uvt-motto.pdf assets/uvt-motto-en.pdf
+
+download-logo:					## Download black logos
+	@rm -rf $(LOGOSDIR)
+	@mkdir -p $(LOGOSDIR)
+	curl -o $(LOGOSDIR)/Logos.zip 'https://www.uvt.ro/?jet_download=534'
+	7z x -o$(LOGOSDIR) $(LOGOSDIR)/Logos.zip
+	qpdf --empty \
+		--pages '$(LOGOSDIR)/Logo UVT - 2017/Logo UVT - 2017.pdf' 14 -- \
+		$(LOGOSDIR)/uvt-background-logo-black-ro.pdf
+	pdfcrop $(LOGOSDIR)/uvt-background-logo-black-ro.pdf
+	magick -density 300 \
+		$(LOGOSDIR)/uvt-background-logo-black-ro-crop.pdf \
+		assets/uvt-background-logo-black-ro.png
+	qpdf --empty \
+		--pages '$(LOGOSDIR)/Logo UVT - 2017/Logo UVT - 2017.pdf' 16 -- \
+		$(LOGOSDIR)/uvt-background-logo-black-en.pdf
+	pdfcrop $(LOGOSDIR)/uvt-background-logo-black-en.pdf
+	magick -density 300 \
+		$(LOGOSDIR)/uvt-background-logo-black-en-crop.pdf \
+		assets/uvt-background-logo-black-en.png
+.PHONY: download-logo
