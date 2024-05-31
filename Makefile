@@ -29,7 +29,7 @@ assets: $(TEX_THEME_ASSETS)			## Compile assets
 .PHONY: assets
 
 clean:								## Remove temporary compilation files
-	rm -rf latex.out images/latex.out
+	rm -rf $(OUTDIR) images/$(OUTDIR) $(LOGOSDIR)
 	rm -rf *.aux *.log *.out
 .PHONY: clean
 
