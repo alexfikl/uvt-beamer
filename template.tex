@@ -1,12 +1,11 @@
 \documentclass[aspectratio=43]{beamer}
-% remember to set the language is using Romanian
-% \usepackage[romanian]{babel}
-
-\usepackage{ifpdf}
+% some nicer environments
 \usepackage{booktabs}
 
 % <<< BEGIN theme
 
+% remember to set the language if using Romanian
+% \usepackage[romanian]{babel}
 \usetheme[language=english]{uvt}
 
 % remove navigation symbols
@@ -16,6 +15,7 @@
 \setbeamercovered{transparent}
 
 % use a different font
+\usepackage{ifpdf}
 \ifmyriadproenabled\else
     \ifpdftex
         \usepackage{helvet}
