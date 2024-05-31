@@ -48,10 +48,8 @@
             }
     \else
         \IfFontExistsTF{Myriad Pro}{
-            \setsansfont{Myriad Pro}[
-                ItalicFont={Myriad Pro Italic},
-                BoldFont={Myriad Pro Bold}
-            ]
+            \setmainfont{Myriad Pro}
+            \setsansfont{Myriad Pro}
             \myriadproenabledtrue
             }{
             \PackageWarning{beamerfontthemeuvt}{Myriad Pro font is not available. Use the nomyriadpro option to silence this warning.}
