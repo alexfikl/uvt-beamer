@@ -1,6 +1,6 @@
-TEXMK?=latexrun
+TEXMK?=latexmk
 OUTDIR=latex.out
-TEXFLAGS?=--latex-cmd pdflatex -O $(OUTDIR)
+TEXFLAGS?=-pdflua -output-directory=$(OUTDIR)
 
 TEX_THEME_STY_FILES=\
 	beamerthemeuvt.sty \
@@ -39,16 +39,14 @@ purge: clean						## Remove all generated files
 
 template.pdf: template.tex $(TEX_THEME_STY_FILES) $(TEX_THEME_ASSETS)
 	$(TEXMK) $(TEXFLAGS) $<
-	$(TEXMK) $(TEXFLAGS) $<
+	cp $(OUTDIR)/$@ .
 
 $(OUTDIR)/uvt-motto.pdf: images/uvt-motto.tex
-	$(TEXMK) $(TEXFLAGS) --latex-cmd xelatex $<
-	$(TEXMK) $(TEXFLAGS) --latex-cmd xelatex $<
-	mv $(shell basename $@) $@
+	$(TEXMK) $(TEXFLAGS) -pdflua $<
 
 images/template.png: template.pdf
 	@rm -rf images/template-*.png
-	convert \
+	magick \
 		-verbose \
 		-density 300 \
 		$<[0-5,12-13] \
@@ -58,10 +56,10 @@ images/template.png: template.pdf
 	montage $(OUTDIR)/template-*.png -border 1 -tile 2x4 -geometry 1000x $@
 
 assets/uvt-background-logo-white-en.png: assets/uvt-background-logo-black-en.png
-	convert $< -channel RGB -negate +channel $@
+	magick $< -channel RGB -negate +channel $@
 
 assets/uvt-background-logo-white-ro.png: assets/uvt-background-logo-black-ro.png
-	convert $< -channel RGB -negate +channel $@
+	magick $< -channel RGB -negate +channel $@
 
 assets/uvt-motto-en.pdf: $(OUTDIR)/uvt-motto.pdf
 	pdfcrop --margins '0 -50 0 -520' $(OUTDIR)/uvt-motto.pdf assets/uvt-motto-ro.pdf
