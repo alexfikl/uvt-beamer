@@ -33,7 +33,7 @@
 \ifthenelse{\equal{\uvt@outer@language}{romanian}}{
     \def\uvt@outer@headerlogo{assets/uvt-logo-ro}
     \def\uvt@outer@motto{assets/uvt-motto-ro}
-    \def\uvt@outer@mottospacing{\hspace{1.05\beamer@rightmargin}\vspace*{-10pt}}
+    \def\uvt@outer@mottospacing{\hspace{1.0\beamer@rightmargin}\vspace*{-0.5\beamer@rightmargin}}
 }{
     \PackageError{beamerinnerthemeuvt}{Unknown language `\uvt@inner@language`}{}
 }}
@@ -56,7 +56,7 @@
 
 \defbeamertemplate*{headline}{uvtframe}{
     \begin{tikzpicture}[remember picture, overlay]
-    \fill[UVTDarkBlue, anchor=west] (0, -0.39) rectangle (0.1, 1);
+    \fill[UVTDarkBlue, anchor=west] (0, -0.39) rectangle (0.1, 1.6\beamer@rightmargin);
     \end{tikzpicture}%
     \vspace{0pt}
     \hfill
