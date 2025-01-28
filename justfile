@@ -16,7 +16,7 @@ template:
     @just pdf template
 
 [doc("Compile image of example file (used in README)")]
-image:
+image: template
     @rm -rf images/template-*.png
     magick \
         -verbose \
@@ -60,6 +60,18 @@ logo:
     7z x -o{{ LOGOSDIR }} {{ LOGOSDIR }}/Logos.zip
     @just logo_extract ro 14
     @just logo_extract en 16
+
+[doc("Update license text")]
+license:
+    python -m reuse download CC-BY-4.0
+    cp LICENSES/CC-BY-4.0.txt LICENSE
+    @rm -rf LICENSES
+
+[doc("Create a zip file with all the files")]
+zip:
+    zip -9 uvt-beamer.zip \
+        LICENSE assets/* template.tex \
+        beamer*themeuvt.sty
 
 [doc("Remove all compilation files")]
 clean:
