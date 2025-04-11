@@ -2,7 +2,8 @@
 
 > [!NOTE]
 > This template style is fairly complete and working well, but any feature requests
-> or bug reports to improve it are **very welcome**!
+> or bug reports to improve it are **very welcome**! The theme should adjust to
+> various aspect ratios and page sizes.
 
 This is a reproduction of the UVT (West University of Timișoara) Power Point
 template in LaTeX. It uses the official [UVT branding](https://dci.uvt.ro/identitate-vizuala)
