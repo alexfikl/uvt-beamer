@@ -26,6 +26,7 @@
 
 % <<< options
 
+\RequirePackage{ifthen}
 \RequirePackage{kvoptions}
 \SetupKeyvalOptions{
     family=uvt,
@@ -38,28 +39,19 @@
 \DeclareBoolOption[false]{progressbar}
 % select language for logos
 \DeclareStringOption[english]{language}
-% show a debug layour grid
+% show a debug layout grid
+\DeclareBoolOption[false]{showframe}
 \DeclareBoolOption[false]{layoutgrid}
 
 \ProcessOptionsBeamer
 \DeclareDefaultOption{\PackageWarning{beamerthemeuvt}{Unknown option `\CurrentOption`}}
 \ProcessKeyvalOptions*
 
-\usecolortheme{uvt}
-\useinnertheme[
-    language=\uvt@language
-    ]{uvt}
-\useoutertheme[
-    language=\uvt@language,
-    \ifuvt@progressbar progressbar,\else\fi
-    ]{uvt}
-\usefonttheme[
-    \ifuvt@nomyriadpro nomyriadpro,\else\fi
-    ]{uvt}
-
 % >>>
 
 % <<< packages
+
+\RequirePackage{ifpdf}
 
 % fancy graphics
 \RequirePackage{tikz}
@@ -70,15 +62,333 @@
 \RequirePackage{adjustbox}
 \RequirePackage{colortbl}
 
-\ifuvt@layoutgrid
+\ifuvt@showframe
     \RequirePackage{showframe}
 \fi
+
+\ifuvt@layoutgrid
+    \RequirePackage[
+        grid, gridBG,
+        gridunit=in,
+        gridcolor=gray!70,
+        subgridcolor=gray!70,
+        texcoord]{eso-pic}
+\fi
+
+\usecolortheme{uvt}
 
 % >>>
 
 % <<< commands
 
 \ProvideDocumentCommand \venue { m } {\def\uvt@venue{#1}}
+
+% >>>
+
+% <<< assets
+
+\ifthenelse{\equal{\uvt@language}{english}}{
+    \def\uvt@headerlogo{assets/uvt-logo-en}
+    \def\uvt@motto{assets/uvt-motto-en}
+    \def\uvt@whitelogo{assets/uvt-background-logo-white-en}
+    \def\uvt@blacklogo{assets/uvt-background-logo-black-en}
+    \def\uvt@mottospacing{\hspace{0.75\beamer@rightmargin}\vspace*{-7.5pt}}
+}{
+\ifthenelse{\equal{\uvt@language}{romanian}}{
+    \def\uvt@headerlogo{assets/uvt-logo-ro}
+    \def\uvt@motto{assets/uvt-motto-ro}
+    \def\uvt@whitelogo{assets/uvt-background-logo-white-ro}
+    \def\uvt@blacklogo{assets/uvt-background-logo-black-ro}
+    \def\uvt@mottospacing{\hspace{1.0\beamer@rightmargin}\vspace*{-0.5\beamer@rightmargin}}
+}{
+    \PackageError{beamerthemeuvt}{Unknown language `\uvt@language`}{}
+}}
+
+% >>>
+
+% <<< fonts
+
+\ifpdftex
+    \RequirePackage[utf8]{inputenc}
+    \RequirePackage[T1]{fontenc}
+\else
+    \RequirePackage{fontspec}
+\fi
+
+\ifuvt@nomyriadpro
+    \usepackage{helvet}
+\else
+    \ifpdftex
+        \IfFileExists{MyriadPro.sty}{
+            \usepackage[onlytext, smallfamily, lf]{MyriadPro}
+        }{
+            \PackageWarning{beamerthemeuvt}{Myriad Pro font is not available to pdfLaTeX. Use the nomyriadpro option to silence this warning.}
+            \usepackage{helvet}}
+    \else
+        \IfFontExistsTF{Myriad Pro}{
+            \setmainfont{Myriad Pro}
+            \setsansfont{Myriad Pro}
+        }{
+            \PackageWarning{beamerthemeuvt}{Myriad Pro font is not available. Use the nomyriadpro option to silence this warning.}
+            \usepackage{helvet}}
+    \fi
+\fi
+\renewcommand{\familydefault}{\sfdefault}
+
+\setbeamerfont{title}        {size=\LARGE, series=\bfseries}
+\setbeamerfont*{subtitle}    {size=\large, series=\mdseries}
+\setbeamerfont{author}       {size=\normalsize, series=\bfseries}
+\setbeamerfont{date}         {size=\small, series=\mdseries}
+\setbeamerfont{venue}        {size=\small, series=\mdseries}
+
+\setbeamerfont{frametitle}   {size=\LARGE, series=\bfseries}
+\setbeamerfont{framesubtitle}{size=\normalsize, series=\mdseries}
+
+\setbeamerfont{section title}{size=\LARGE,series=\bfseries}
+
+\setbeamerfont{alerted text} {size=\normalsize,series=\bfseries}
+\setbeamerfont{block title}{size=\normalsize,series=\bfseries}
+\setbeamerfont{block title alerted}{size=\normalsize,series=\bfseries}
+
+\setbeamerfont{page number in head/foot}{size=\tiny, series=\bfseries}
+\setbeamerfont{url text}{size=\scriptsize,series=\bfseries}
+\setbeamerfont{author in head/foot}{size=\scriptsize,series=\bfseries}
+
+\setbeamerfont{enumerate item}{size=\small, series=\bfseries}
+\setbeamerfont{description item}{size=\small, series=\bfseries}
+
+% >>>
+
+% <<< outer: header / footer
+
+\defbeamertemplate*{frametitle}{uvtframe}{
+    \vspace{-18pt}
+    \begin{beamercolorbox}[wd=\paperwidth, leftskip=0.05\paperwidth]{frametitle}
+        \ifx\insertframesubtitle\empty
+        {\vspace{10pt}\usebeamerfont{frametitle}\usebeamercolor[fg]{frametitle}\insertframetitle}
+        \else
+        {\usebeamerfont{frametitle}\usebeamercolor[fg]{frametitle}\insertframetitle}\\[-7pt]
+        {\usebeamerfont{framesubtitle}\usebeamercolor[fg]{framesubtitle}\insertframesubtitle}
+        \fi
+    \end{beamercolorbox}
+}
+
+\defbeamertemplate*{headline}{uvtframe}{
+    \begin{tikzpicture}[remember picture, overlay]
+    \fill[UVTDarkBlue, anchor=west] (0, -0.39) rectangle (0.1, 1.6\beamer@rightmargin);
+    \end{tikzpicture}%
+    \vspace{0pt}
+    \hfill
+    \includegraphics[width=0.2\paperwidth]{\uvt@headerlogo}
+    \hspace{\beamer@rightmargin}
+}
+
+\newlength{\uvt@progressbarwidth}
+\defbeamertemplate{footline}{uvtframe}{
+    \vspace{5pt}
+    \ifuvt@progressbar
+    \uvt@progressbarwidth=\paperwidth
+    \multiply\uvt@progressbarwidth by \insertframenumber
+    \divide\uvt@progressbarwidth by \inserttotalframenumber
+    \begin{tikzpicture}[remember picture, overlay]
+    \fill[UVTYellow, anchor=west]
+        (0, -0.3ex) rectangle (\uvt@progressbarwidth, 0ex);
+    \end{tikzpicture}%
+    \fi
+    \begin{beamercolorbox}[wd=\textwidth, ht=2.5ex]{footline hline}%
+    \hfill \includegraphics[width=0.2\paperwidth]{\uvt@motto}
+    \uvt@mottospacing
+
+    \hspace{\beamer@leftmargin}%
+    \usebeamerfont{author in head/foot}\insertshortauthor%
+    \hfill\usebeamercolor[fg]{url text}\usebeamerfont{url text}%
+    \href{https://www.uvt.ro}{www.uvt.ro}%
+    \hspace{1.75\beamer@rightmargin}
+    \vspace*{0.75pt}
+    \end{beamercolorbox}
+    \begin{beamercolorbox}[wd=\textwidth, sep=5pt]{footline}%
+        \centering
+        \usebeamertemplate*{frame footer}
+        \usebeamercolor[fg]{page number in head/foot}
+        \usebeamerfont{page number in head/foot}
+        \insertframenumber~/~\inserttotalframenumber
+    \end{beamercolorbox}
+}
+\setbeamertemplate{footline}[uvtframe]
+
+% >>>
+
+% <<< inner: environments
+
+% <<< templates
+
+\setbeamertemplate{background}[uvtslide]
+
+\NewDocumentCommand \titleframe {} {
+    \setbeamertemplate{title page}[uvttitlepage]
+    \setbeamertemplate{background}[uvttitlepage]
+    \frame[plain,noframenumbering]{\titlepage}
+    \setbeamertemplate{background}[uvtslide]
+}
+
+\NewDocumentCommand \sectionframe {} {
+    \setbeamertemplate{section page}[uvtsectionpage]
+    \setbeamertemplate{background}[uvttitlepage]
+    \frame[plain,noframenumbering]{\sectionpage}
+    \setbeamertemplate{background}[uvtslide]
+}
+\AtBeginSection{
+    \sectionframe
+}
+
+% >>>
+
+% <<< title page
+
+\defbeamertemplate{title page}{uvttitlepage}
+{
+    \vspace{0.55\paperheight}
+    \begin{center}
+        % title format
+        \usebeamerfont{title}\usebeamercolor[fg]{title}
+        \inserttitle\par
+        % subtitle
+        \usebeamerfont{subtitle}\insertsubtitle\par%
+        \bigskip
+        % author
+        \usebeamerfont{author}\insertauthor\par%
+        \usebeamerfont{date}\insertdate%
+        \@ifundefined{uvt@venue}{}{\par\usebeamerfont{venue}\uvt@venue}
+    \end{center}
+}
+
+\defbeamertemplate{section page}{uvtsectionpage}
+{
+    \vspace{0.55\paperheight}
+    \begin{center}
+        \begin{minipage}[t][][c]{\textwidth}%
+            \centering
+            \usebeamerfont{section title}\usebeamercolor[fg]{section title}
+            \insertsectionhead\par
+        \end{minipage}
+    \end{center}
+    \vfill
+}
+
+% >>>
+
+% <<< background
+
+\defbeamertemplate{background}{uvttitlepage}
+{
+    \begin{tikzpicture}[remember picture, overlay]
+        \node [shading=axis,
+               rectangle,
+               left color=UVTDarkBlue,
+               right color=UVTLightBlue!70,
+               shading angle=45,
+               anchor=north,
+               minimum width=\paperwidth, minimum height=\paperheight]
+               (box) at (current page.north) {};
+        \node [opacity=0.5, anchor=north, yshift=-0.7cm] at (current page.north)
+            {\includegraphics[width=0.45\paperheight]{\uvt@whitelogo}};
+    \end{tikzpicture}
+}
+
+\defbeamertemplate{background}{uvtslide}{
+    \begin{tikzpicture}[remember picture, overlay]
+        \node [opacity=0.01] at (current page.center)
+            {\includegraphics[width=0.4\paperwidth]{\uvt@blacklogo}};
+    \end{tikzpicture}
+}
+
+% >>>
+
+% <<< itemize
+
+\setbeamertemplate{itemize item}{
+    \tikz{
+        \draw[fill=UVTYellow, draw=none] (0, 0) rectangle (0.1, 0.1);
+        \draw[fill=UVTYellow, draw=none] (0.1, 0.1) rectangle (0.2, 0.2);
+        \draw[fill=UVTYellow, draw=none] (0, 0.2) rectangle (0.1, 0.3);
+    }
+}
+
+\setbeamertemplate{itemize subitem}{
+    \tikz{
+        \draw[fill=UVTDarkBlue, draw=none] (0, 0) rectangle (0.075, 0.075);
+        \draw[fill=UVTDarkBlue, draw=none] (0.075, 0.075) rectangle (0.15, 0.15);
+        \draw[fill=UVTDarkBlue, draw=none] (0, 0.15) rectangle (0.075, 0.225);
+    }
+}
+
+\setbeamertemplate{itemize subsubitem}{
+    \tikz{
+        \draw[fill=white, draw=none] (0, 0) rectangle (0.075, 0.075);
+        \draw[fill=UVTLightBlue, draw=none] (0.075, 0.075) rectangle (0.15, 0.15);
+        \draw[fill=white, draw=none] (0, 0.15) rectangle (0.075, 0.225);
+    }
+}
+
+% >>>
+
+% <<< blocks
+
+\setbeamertemplate{block begin}{
+    \vspace{\fill}
+    \begin{adjustbox}{max width=0.98\textwidth, trim=0 2ex 0 0,clip}
+        \begin{tabular}{!{\color{UVTDarkBlue}{\vrule width 4pt}}>{\columncolor[gray]{0.97}}m{\textwidth}}
+    	    \begin{beamercolorbox}{block title}
+                \usebeamerfont*{block title}
+                \vbox{}\vskip 0.2ex
+                \insertblocktitle
+            \end{beamercolorbox}
+            \usebeamerfont*{block text}
+}
+\setbeamertemplate{block end}{\end{tabular}\end{adjustbox}}
+
+\setbeamertemplate{block alerted begin}{
+    \vspace{\fill}
+    \begin{adjustbox}{max width=0.98\textwidth, trim=0 2ex 0 0,clip}
+        \begin{tabular}{!{\color{UVTYellow}{\vrule width 4pt}}>{\columncolor[gray]{0.97}}m{\textwidth}}
+    	    \begin{beamercolorbox}{alerted text}
+                \usebeamerfont*{block title}
+                \vbox{}\vskip 0.2ex
+                \insertblocktitle
+            \end{beamercolorbox}
+            \usebeamerfont*{block text}
+}
+\setbeamertemplate{block alerted end}{\end{tabular}\end{adjustbox}}
+
+\setbeamertemplate{block example begin}{
+    \vspace{\fill}
+    \begin{adjustbox}{max width=0.98\textwidth, trim=0 2ex 0 0,clip}
+        \begin{tabular}{!{\color{UVTLightBlue}{\vrule width 4pt}}>{\columncolor[gray]{0.97}}m{\textwidth}}
+    	    \begin{beamercolorbox}{example text}
+                \usebeamerfont*{block title}
+                \vbox{}\vskip 0.2ex
+                \insertblocktitle
+            \end{beamercolorbox}
+            \usebeamerfont*{block text}
+}
+\setbeamertemplate{block example end}{\end{tabular}\end{adjustbox}}
+
+% >>>
+
+% <<< figures
+
+% disable "Figure:" in the captions
+\setbeamertemplate{caption}{\scriptsize\insertcaption}
+\setbeamertemplate{caption label separator}{}
+
+% >>>
+
+\setbeamersize{
+    text margin left=.05\paperwidth,
+    text margin right=.05\paperwidth,
+    description width=0.075\paperwidth,
+    }
+\setlength{\labelsep}{\dimexpr\labelsep - 0.2em\relax}
 
 % >>>
 
