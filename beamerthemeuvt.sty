@@ -18,8 +18,8 @@
 %   https://github.com/lukeolson/illinois-letterhead
 %   though little of it remains.
 
-\def\fileversion{v0.1}
-\def\filedate{2023/12/21}
+\def\fileversion{v0.2}
+\def\filedate{2025/04/11}
 
 \NeedsTeXFormat{LaTeX2e}
 \ProvidesPackage{beamerthemeuvt}[\filedate \fileversion UVT Beamer Theme]
@@ -336,12 +336,13 @@
 
 \setbeamertemplate{block begin}{
     \vspace{\fill}
-    \begin{adjustbox}{max width=0.98\textwidth, trim=0 2ex 0 0,clip}
+    \begin{adjustbox}{max width=0.98\textwidth}
         \begin{tabular}{!{\color{UVTDarkBlue}{\vrule width 4pt}}>{\columncolor[gray]{0.97}}m{\textwidth}}
     	    \begin{beamercolorbox}{block title}
                 \usebeamerfont*{block title}
-                \vbox{}\vskip 0.2ex
+                \vbox{}\vskip 0.05ex
                 \insertblocktitle
+                \vbox{}\vskip 0.2ex
             \end{beamercolorbox}
             \usebeamerfont*{block text}
 }
@@ -349,12 +350,13 @@
 
 \setbeamertemplate{block alerted begin}{
     \vspace{\fill}
-    \begin{adjustbox}{max width=0.98\textwidth, trim=0 2ex 0 0,clip}
+    \begin{adjustbox}{max width=0.98\textwidth}
         \begin{tabular}{!{\color{UVTYellow}{\vrule width 4pt}}>{\columncolor[gray]{0.97}}m{\textwidth}}
     	    \begin{beamercolorbox}{alerted text}
                 \usebeamerfont*{block title}
-                \vbox{}\vskip 0.2ex
+                \vbox{}\vskip 0.05ex
                 \insertblocktitle
+                \vbox{}\vskip 0.2ex
             \end{beamercolorbox}
             \usebeamerfont*{block text}
 }
@@ -362,12 +364,13 @@
 
 \setbeamertemplate{block example begin}{
     \vspace{\fill}
-    \begin{adjustbox}{max width=0.98\textwidth, trim=0 2ex 0 0,clip}
+    \begin{adjustbox}{max width=0.98\textwidth}
         \begin{tabular}{!{\color{UVTLightBlue}{\vrule width 4pt}}>{\columncolor[gray]{0.97}}m{\textwidth}}
     	    \begin{beamercolorbox}{example text}
                 \usebeamerfont*{block title}
-                \vbox{}\vskip 0.2ex
+                \vbox{}\vskip 0.05ex
                 \insertblocktitle
+                \vbox{}\vskip 0.2ex
             \end{beamercolorbox}
             \usebeamerfont*{block text}
 }
