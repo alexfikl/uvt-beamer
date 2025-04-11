@@ -18,8 +18,8 @@ Templates in the same series:
 
 ## How to use it
 
-Copy the `beamerthemeuvt.sty` and the accompanying `sty` files to your local
-directory together with any relevant assets from the `assets` folder. You can
+Copy the `beamerthemeuvt.sty` and the accompanying `beamercolorthemeuvt.sty` file
+to your local directory together with any relevant assets from the `assets` folder. You can
 use the `template.tex` file to get you started with a few useful options and examples.
 The `template.tex` can then be built with `PDFLaTeX` (or `XeLaTeX` or `LuaLaTeX`
 for the adventurous).
@@ -31,6 +31,7 @@ The package defines the following options used as `\usetheme[opts]{uvt}`.
 | `nomyriadpro`                     | Do not load the *Myriad Pro* fonts    |
 | `language=<lang>`                 | One of *english* or *romanian*        |
 | `progressbar`                     | Adds a yellow progress bar in the footer |
+| `showframe`                       | Shows a frame around page elements (margins, etc.) |
 | `layoutgrid`                      | Adds a debug grid to check alignment  |
 
 ## Fonts
