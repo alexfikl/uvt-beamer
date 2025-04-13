@@ -20,6 +20,12 @@ Templates in the same series:
 * [UVT Beamer Presentation Template](https://github.com/alexfikl/uvt-beamer)
 * [UVT Conference Poster Template](https://github.com/alexfikl/uvt-poster)
 
+## What it looks like
+
+[Full PDF](template.pdf)
+
+![template](images/template.png "Template")
+
 ## How to use it
 
 Copy the `beamerthemeuvt.sty` and the accompanying `beamercolorthemeuvt.sty` file
@@ -66,12 +72,6 @@ If you are using `XeLaTeX` or `LuaLaTeX`, there are many other nice fonts to
 keep in mind that would work well. For example: Carlito (a Calibri clone),
 Caladea (a Cambria clone), Montserrat (inspired by Gotham), Adobe Source Sans,
 etc. A nice font will always make your presentation look nicer!
-
-## What it looks like
-
-[Full PDF](template.pdf)
-
-![template](images/template.png "Template")
 
 ## License
 
