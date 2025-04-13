@@ -1,5 +1,8 @@
 # UVT Beamer Theme
 
+[![GitHub Actions Workflow Status](https://github.com/alexfikl/uvt-beamer/actions/workflows/ci.yml/badge.svg)](https://github.com/alexfikl/uvt-beamer/actions/workflows/ci.yml)
+[![Open in Overleaf](https://img.shields.io/static/v1?label=LaTeX&message=Open-in-Overleaf&color=47a141&style=flat&logo=overleaf)](https://www.overleaf.com/docs?snip_uri=https://github.com/alexfikl/uvt-beamer/archive/refs/heads/main.zip)
+
 > [!NOTE]
 > This template style is fairly complete and working well, but any feature requests
 > or bug reports to improve it are **very welcome**! The theme should adjust to
