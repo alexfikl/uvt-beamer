@@ -81,6 +81,11 @@
 
 % <<< commands
 
+\ProvideDocumentCommand \uvtheaderlogo { m } {\def\uvt@headerlogo{#1}}
+\ProvideDocumentCommand \uvtmotto { m } {\def\uvt@motto{#1}}
+\ProvideDocumentCommand \uvttitlelogo { m } {\def\uvt@titlelogo{#1}}
+\ProvideDocumentCommand \uvtslidelogo { m } {\def\uvt@slidelogo{#1}}
+
 \ProvideDocumentCommand \venue { m } {\def\uvt@venue{#1}}
 
 % >>>
@@ -88,17 +93,17 @@
 % <<< assets
 
 \ifthenelse{\equal{\uvt@language}{english}}{
-    \def\uvt@headerlogo{assets/uvt-logo-en}
-    \def\uvt@motto{assets/uvt-motto-en}
-    \def\uvt@whitelogo{assets/uvt-background-logo-white-en}
-    \def\uvt@blacklogo{assets/uvt-background-logo-black-en}
+    \uvtheaderlogo{\includegraphics[width=0.2\paperwidth]{assets/uvt-logo-en}}
+    \uvtmotto{\includegraphics[width=0.2\paperwidth]{assets/uvt-motto-en}}
+    \uvttitlelogo{\includegraphics[width=0.45\paperheight]{assets/uvt-background-logo-white-en}}
+    \uvtslidelogo{\includegraphics[width=0.45\paperheight]{assets/uvt-background-logo-black-en}}
     \def\uvt@mottospacing{\hspace{0.75\beamer@rightmargin}\vspace*{-7.5pt}}
 }{
 \ifthenelse{\equal{\uvt@language}{romanian}}{
-    \def\uvt@headerlogo{assets/uvt-logo-ro}
-    \def\uvt@motto{assets/uvt-motto-ro}
-    \def\uvt@whitelogo{assets/uvt-background-logo-white-ro}
-    \def\uvt@blacklogo{assets/uvt-background-logo-black-ro}
+    \uvtheaderlogo{\includegraphics[width=0.2\paperwidth]{assets/uvt-logo-ro}}
+    \uvtmotto{\includegraphics[width=0.2\paperwidth]{assets/uvt-motto-ro}}
+    \uvttitlelogo{\includegraphics[width=0.45\paperheight]{assets/uvt-background-logo-white-ro}}
+    \uvtslidelogo{\includegraphics[width=0.45\paperheight]{assets/uvt-background-logo-black-ro}}
     \def\uvt@mottospacing{\hspace{1.0\beamer@rightmargin}\vspace*{-0.5\beamer@rightmargin}}
 }{
     \PackageError{beamerthemeuvt}{Unknown language `\uvt@language`}{}
@@ -179,7 +184,7 @@
     \end{tikzpicture}%
     \vspace{0pt}
     \hfill
-    \includegraphics[width=0.2\paperwidth]{\uvt@headerlogo}
+    \uvt@headerlogo
     \hspace{\beamer@rightmargin}
 }
 
@@ -196,7 +201,7 @@
     \end{tikzpicture}%
     \fi
     \begin{beamercolorbox}[wd=\textwidth, ht=2.5ex]{footline hline}%
-    \hfill \includegraphics[width=0.2\paperwidth]{\uvt@motto}
+    \hfill \uvt@motto
     \uvt@mottospacing
 
     \hspace{\beamer@leftmargin}%
@@ -291,14 +296,13 @@
                minimum width=\paperwidth, minimum height=\paperheight]
                (box) at (current page.north) {};
         \node [opacity=0.5, anchor=north, yshift=-0.7cm] at (current page.north)
-            {\includegraphics[width=0.45\paperheight]{\uvt@whitelogo}};
+            {\uvt@titlelogo};
     \end{tikzpicture}
 }
 
 \defbeamertemplate{background}{uvtslide}{
     \begin{tikzpicture}[remember picture, overlay]
-        \node [opacity=0.01] at (current page.center)
-            {\includegraphics[width=0.4\paperwidth]{\uvt@blacklogo}};
+        \node [opacity=0.01] at (current page.center) {\uvt@slidelogo};
     \end{tikzpicture}
 }
 
