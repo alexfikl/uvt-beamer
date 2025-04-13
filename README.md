@@ -38,6 +38,18 @@ The package defines the following options used as `\usetheme[opts]{uvt}`.
 | `showframe`                       | Shows a frame around page elements (margins, etc.) |
 | `layoutgrid`                      | Adds a debug grid to check alignment  |
 
+The `language` is used to automatically select the logos with appropriate text.
+This can be avoided by providing your own logos using the following commands,
+but care must be taken to size them nicely.
+
+| Macro                             | Description                           |
+| :-                                | :-                                    |
+| `\uvtheaderlogo`                  | Logo used in the header of each frame |
+| `\uvtmotto`                       | Colorful motto used in the footer of each slide |
+| `\uvttitlelogo`                   | Large logo used on the titlepage      |
+| `\uvtslidelogo`                   | Transparent logo used as background on slides |
+| `\venue`                          | Venue name (for the presentation) in title page |
+
 ## Fonts
 
 Note that, by default this uses the [Myriad Pro](https://fonts.adobe.com/fonts/myriad)
