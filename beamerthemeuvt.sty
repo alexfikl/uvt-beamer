@@ -47,6 +47,7 @@
 % <<< packages
 
 \RequirePackage{ifpdf}
+\RequirePackage{relsize}
 
 % fancy graphics
 \RequirePackage{tikz}
@@ -146,16 +147,20 @@
 
 \setbeamerfont{section title}{size=\LARGE,series=\bfseries}
 
-\setbeamerfont{alerted text} {size=\normalsize,series=\bfseries}
-\setbeamerfont{block title}{size=\normalsize,series=\bfseries}
-\setbeamerfont{block title alerted}{size=\normalsize,series=\bfseries}
+\setbeamerfont{alerted text} {series=\bfseries}
+\setbeamerfont{block title}{size=\relsize{+1},series=\bfseries}
+\setbeamerfont{block title alerted}{size=\relsize{+1},series=\bfseries}
 
 \setbeamerfont{page number in head/foot}{size=\tiny, series=\bfseries}
 \setbeamerfont{url text}{size=\scriptsize,series=\bfseries}
 \setbeamerfont{author in head/foot}{size=\scriptsize,series=\bfseries}
 
-\setbeamerfont{enumerate item}{size=\small, series=\bfseries}
-\setbeamerfont{description item}{size=\small, series=\bfseries}
+\setbeamerfont{enumerate item}{size={}, series=\bfseries}
+\setbeamerfont{description item}{size={}, series=\bfseries}
+
+\setbeamerfont{itemize/enumerate body}{size={}}
+\setbeamerfont{itemize/enumerate subbody}{size={}}
+\setbeamerfont{itemize/enumerate subsubbody}{size={}}
 
 % >>>
 
