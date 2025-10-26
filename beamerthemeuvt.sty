@@ -305,27 +305,34 @@
 
 % <<< itemize
 
+% FIXME: figure out how to ensure that the bullets are actually in the middle of
+% the text line
+
+\def\uvt@itemsize{0.5ex}
 \setbeamertemplate{itemize item}{
     \tikz{
-        \draw[fill=UVTYellow, draw=none] (0, 0) rectangle (0.1, 0.1);
-        \draw[fill=UVTYellow, draw=none] (0.1, 0.1) rectangle (0.2, 0.2);
-        \draw[fill=UVTYellow, draw=none] (0, 0.2) rectangle (0.1, 0.3);
+        \draw[fill=UVTYellow, draw=none] (0, 0) rectangle ++(\uvt@itemsize, \uvt@itemsize);
+        \draw[fill=UVTYellow, draw=none] (\uvt@itemsize, \uvt@itemsize) rectangle ++(\uvt@itemsize, \uvt@itemsize);
+        \draw[fill=UVTYellow, draw=none] (0, 2*\uvt@itemsize) rectangle ++(\uvt@itemsize, \uvt@itemsize);
     }
 }
 
+\def\uvt@subitemsize{0.35ex}
 \setbeamertemplate{itemize subitem}{
     \tikz{
-        \draw[fill=UVTDarkBlue, draw=none] (0, 0) rectangle (0.075, 0.075);
-        \draw[fill=UVTDarkBlue, draw=none] (0.075, 0.075) rectangle (0.15, 0.15);
-        \draw[fill=UVTDarkBlue, draw=none] (0, 0.15) rectangle (0.075, 0.225);
+        \draw[fill=white, draw=none] (0, -0.5*\uvt@subitemsize) rectangle ++(0.01, 0.01);
+        \draw[fill=UVTDarkBlue, draw=none] (0, 0) rectangle ++(\uvt@subitemsize, \uvt@subitemsize);
+        \draw[fill=UVTDarkBlue, draw=none] (\uvt@subitemsize, \uvt@subitemsize) rectangle ++(\uvt@subitemsize, \uvt@subitemsize);
+        \draw[fill=UVTDarkBlue, draw=none] (0, 2*\uvt@subitemsize) rectangle ++(\uvt@subitemsize, \uvt@subitemsize);
     }
 }
 
 \setbeamertemplate{itemize subsubitem}{
     \tikz{
-        \draw[fill=white, draw=none] (0, 0) rectangle (0.075, 0.075);
-        \draw[fill=UVTLightBlue, draw=none] (0.075, 0.075) rectangle (0.15, 0.15);
-        \draw[fill=white, draw=none] (0, 0.15) rectangle (0.075, 0.225);
+        \draw[fill=white, draw=none] (0, -0.5*\uvt@subitemsize) rectangle ++(0.01, 0.01);
+        \draw[fill=white, draw=none] (0, 0) rectangle ++(\uvt@subitemsize, \uvt@subitemsize);
+        \draw[fill=UVTLightBlue, draw=none] (\uvt@subitemsize, \uvt@subitemsize) rectangle ++(\uvt@subitemsize, \uvt@subitemsize);
+        \draw[fill=white, draw=none] (0, 2*\uvt@subitemsize) rectangle ++(\uvt@subitemsize, \uvt@subitemsize);
     }
 }
 
