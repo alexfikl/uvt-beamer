@@ -196,7 +196,7 @@
     \multiply\uvt@progressbarwidth by \insertframenumber
     \divide\uvt@progressbarwidth by \inserttotalframenumber
     \begin{tikzpicture}[remember picture, overlay]
-    \fill[UVTYellow, anchor=west]
+    \fill[UVTBeamerYellow, anchor=west]
         (0, -0.3ex) rectangle (\uvt@progressbarwidth, 0ex);
     \end{tikzpicture}%
     \fi
@@ -316,9 +316,9 @@
 \def\uvt@itemsize{0.5ex}
 \setbeamertemplate{itemize item}{
     \tikz{
-        \draw[fill=UVTYellow, draw=none] (0, 0) rectangle ++(\uvt@itemsize, \uvt@itemsize);
-        \draw[fill=UVTYellow, draw=none] (\uvt@itemsize, \uvt@itemsize) rectangle ++(\uvt@itemsize, \uvt@itemsize);
-        \draw[fill=UVTYellow, draw=none] (0, 2*\uvt@itemsize) rectangle ++(\uvt@itemsize, \uvt@itemsize);
+        \draw[fill=UVTBeamerYellow, draw=none] (0, 0) rectangle ++(\uvt@itemsize, \uvt@itemsize);
+        \draw[fill=UVTBeamerYellow, draw=none] (\uvt@itemsize, \uvt@itemsize) rectangle ++(\uvt@itemsize, \uvt@itemsize);
+        \draw[fill=UVTBeamerYellow, draw=none] (0, 2*\uvt@itemsize) rectangle ++(\uvt@itemsize, \uvt@itemsize);
     }
 }
 
@@ -362,7 +362,7 @@
 \setbeamertemplate{block alerted begin}{
     \vspace{\fill}
     \begin{adjustbox}{max width=0.98\textwidth}
-        \begin{tabular}{!{\color{UVTYellow}{\vrule width 4pt}}>{\columncolor[gray]{0.97}}m{\textwidth}}
+        \begin{tabular}{!{\color{UVTBeamerYellow}{\vrule width 4pt}}>{\columncolor[gray]{0.97}}m{\textwidth}}
     	    \begin{beamercolorbox}{alerted text}
                 \usebeamerfont*{block title}
                 \vbox{}\vskip 0.05ex
