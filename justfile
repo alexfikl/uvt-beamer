@@ -41,7 +41,7 @@ assets: logo motto
 [private]
 logo_extract lang page:
     qpdf --empty \
-        --pages '{{ LOGOSDIR }}/Logo UVT - 2017/Logo UVT - 2017.pdf' {{ page }} -- \
+        --pages '{{ LOGOSDIR }}/Logo UVT - 2017.pdf' {{ page }} -- \
         {{ LOGOSDIR }}/uvt-background-logo-black-{{ lang }}.pdf
     pdfcrop {{ LOGOSDIR }}/uvt-background-logo-black-{{ lang }}.pdf
     magick -density 300 \
@@ -52,14 +52,39 @@ logo_extract lang page:
         -channel RGB -negate +channel \
         assets/uvt-background-logo-white-{{ lang }}.png
 
+[private]
+logo_tile input output:
+    #!/usr/bin/env bash
+    set -euo pipefail
+
+    magick '{{ input }}' -rotate 0   '{{ LOGOSDIR }}/logo-uvt-tile-000.png'
+    magick '{{ input }}' -rotate 90  '{{ LOGOSDIR }}/logo-uvt-tile-090.png'
+    magick '{{ input }}' -rotate 180 '{{ LOGOSDIR }}/logo-uvt-tile-180.png'
+    magick '{{ input }}' -rotate 270 '{{ LOGOSDIR }}/logo-uvt-tile-270.png'
+
+    W=$(magick identify -format '%w' '{{ input }}')
+    H=$(magick identify -format '%h' '{{ input }}')
+    S=$((2*H + W))
+    HALF=$((H / 2))
+
+    magick -size ${S}x${S} xc:none \
+        '{{ LOGOSDIR }}/logo-uvt-tile-000.png' -geometry +$((H + 32))+$((HALF + 56)) -composite \
+        '{{ LOGOSDIR }}/logo-uvt-tile-090.png' -geometry +28+$((H + 32)) -composite \
+        '{{ LOGOSDIR }}/logo-uvt-tile-270.png' -geometry +$((H + W - 28))+$((H - 32)) -composite \
+        '{{ LOGOSDIR }}/logo-uvt-tile-180.png' -geometry +$((H - 32))+$((H + W - HALF - 56)) -composite \
+        "{{ LOGOSDIR }}/$(basename {{ without_extension(output) }}).png"
+
+    magick -density 300 \
+        "{{ LOGOSDIR }}/$(basename {{ without_extension(output) }}).png" \
+        {{ output }}
+
 [doc("Download logos and preprocess them")]
 logo:
-    @rm -rf {{ LOGOSDIR }}
     @mkdir -p {{ LOGOSDIR }}
-    @curl -o {{ LOGOSDIR }}/Logos.zip 'https://www.uvt.ro/?jet_download=534'
-    7z x -o{{ LOGOSDIR }} {{ LOGOSDIR }}/Logos.zip
+    unrar e -idq -o+ {{ LOGOSDIR }}/Logos.rar {{ LOGOSDIR }}/
     @just logo_extract ro 14
     @just logo_extract en 16
+    @just logo_tile '{{ LOGOSDIR }}/Asset 4@2x.png' 'assets/logo-uvt-tile.pdf'
 
 [doc("Update license text")]
 license:
