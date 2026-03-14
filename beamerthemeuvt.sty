@@ -28,8 +28,8 @@
     prefix=uvt@
 }
 
-% enable Myriad Pro
-\DeclareBoolOption[false]{nomyriadpro}
+% enable Helvetica Now Display
+\DeclareBoolOption[false]{helveticanow}
 % show progressbar in the footer
 \DeclareBoolOption[false]{progressbar}
 % select language for logos
@@ -116,22 +116,22 @@
     \RequirePackage{fontspec}
 \fi
 
-\ifuvt@nomyriadpro
-    \usepackage{helvet}
+\ifuvt@helveticanow
+    \ifpdftex
+        \PackageWarning{uvt-letterhead}{HelveticaNowDisplay font is not available on pdfLaTeX. Remove the 'helveticanow' option to silence this warning or switch to LuaLaTeX / XeLaTex.}
+        \RequirePackage{tgheros}
+    \else
+        \IfFontExistsTF{HelveticaNowDisplay}{
+            \setsansfont[Ligatures=TeX]{HelveticaNowDisplay}
+        }{
+            \PackageWarning{uvt-letterhead}{HelveticaNowDisplay font is not available on your system. Remove the 'helveticanow' option to silence this warning.}
+            \setsansfont{TeX Gyre Heros}}
+    \fi
 \else
     \ifpdftex
-        \IfFileExists{MyriadPro.sty}{
-            \usepackage[onlytext, smallfamily, lf]{MyriadPro}
-        }{
-            \PackageWarning{beamerthemeuvt}{Myriad Pro font is not available to pdfLaTeX. Use the nomyriadpro option to silence this warning.}
-            \usepackage{helvet}}
+        \RequirePackage{tgheros}
     \else
-        \IfFontExistsTF{Myriad Pro}{
-            \setmainfont{Myriad Pro}
-            \setsansfont{Myriad Pro}
-        }{
-            \PackageWarning{beamerthemeuvt}{Myriad Pro font is not available. Use the nomyriadpro option to silence this warning.}
-            \usepackage{helvet}}
+        \setsansfont{TeX Gyre Heros}
     \fi
 \fi
 \renewcommand{\familydefault}{\sfdefault}
