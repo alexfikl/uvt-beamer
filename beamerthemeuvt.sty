@@ -252,7 +252,19 @@
 
 \defbeamertemplate{title page}{uvttitlepage}
 {
-    \vspace{2cm}
+    \begin{tikzpicture}[remember picture, overlay]
+    % top right
+    \node[anchor=north east, opacity=0.5]
+        at ([yshift=-0.25cm]current page.north east)
+        {\usebeamerfont{venue} \textcolor{UVTWhite}{{\textbf{\uvt@venueupper}}}};
+
+    % bottom left
+    \node[anchor=south west, opacity=0.5]
+        at ([yshift=0.25cm]current page.south west)
+        {\textcolor{UVTWhite}{\href{https://www.uvt.ro}{\textbf{www.uvt.ro}}}};
+    \end{tikzpicture}
+
+    \vfill
     \begin{center}
         % title format
         \usebeamerfont{title}\usebeamercolor[fg]{title}
@@ -266,23 +278,12 @@
         % date
         \usebeamerfont{date}\insertdate%
     \end{center}
-
-    \begin{tikzpicture}[remember picture, overlay]
-    % top right
-    \node[anchor=north east, opacity=0.5]
-        at ([yshift=-0.25cm]current page.north east)
-        {\usebeamerfont{venue} \textcolor{UVTWhite}{{\textbf{\uvt@venueupper}}}};
-
-    % bottom left
-    \node[anchor=south west, opacity=0.5]
-        at ([yshift=0.25cm]current page.south west)
-        {\textcolor{UVTWhite}{\href{https://www.uvt.ro}{\textbf{www.uvt.ro}}}};
-    \end{tikzpicture}
+    \vfill
 }
 
 \defbeamertemplate{section page}{uvtsectionpage}
 {
-    \vspace{0.55\paperheight}
+    \vfill
     \begin{center}
         \begin{minipage}[t][][c]{\textwidth}%
             \centering
