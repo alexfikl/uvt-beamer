@@ -82,7 +82,7 @@
 \ProvideDocumentCommand \uvttitlelogo { m } {\def\uvt@titlelogo{#1}}
 \ProvideDocumentCommand \uvtslidelogo { m } {\def\uvt@slidelogo{#1}}
 
-\ProvideDocumentCommand \venue { m } {\def\uvt@venue{#1}}
+\ProvideDocumentCommand \venue { m } {\def\uvt@venueupper{\MakeUppercase{#1}}}
 
 % >>>
 
@@ -262,15 +262,16 @@
         \bigskip
         % author
         \usebeamerfont{author}\insertauthor\par%
+        \medskip
+        % date
         \usebeamerfont{date}\insertdate%
-        \@ifundefined{uvt@venue}{}{\par\usebeamerfont{venue}\uvt@venue}
     \end{center}
 
     \begin{tikzpicture}[remember picture, overlay]
     % top right
     \node[anchor=north east, opacity=0.5]
         at ([yshift=-0.25cm]current page.north east)
-        {\usebeamerfont{venue}\textcolor{UVTWhite}{\textbf{Universitatea de Vest din Timișoara}}};
+        {\usebeamerfont{venue} \textcolor{UVTWhite}{{\textbf{\uvt@venueupper}}}};
 
     % bottom left
     \node[anchor=south west, opacity=0.5]
@@ -302,39 +303,39 @@
 
 \defbeamertemplate{background}{uvttitlepage}
 {
-\begin{tikzpicture}[remember picture, overlay]
-% background
-\fill[UVTBeamerDarkBlue] (current page.south west) rectangle (current page.north east);
+    \begin{tikzpicture}[remember picture, overlay]
+    % background
+    \fill[UVTBeamerDarkBlue] (current page.south west) rectangle (current page.north east);
 
-% pattern
-\begin{scope}[opacity=0.03]
-\pgfmathsetmacro{\pw}{\paperwidth / 1cm}
-\pgfmathsetmacro{\ph}{\paperheight / 1cm}
+    % pattern
+    \begin{scope}[opacity=0.03]
+    \pgfmathsetmacro{\pw}{\paperwidth / 1cm}
+    \pgfmathsetmacro{\ph}{\paperheight / 1cm}
 
-\foreach \y in {0.5, -1.0, ..., -\ph} {
-    \pgfmathsetmacro{\yeven}{\y}
-    \foreach \x in {0, 1.5, ..., \pw} {
-        \node[inner sep=0, anchor=north west]
-            at ([xshift=\x cm, yshift=\yeven cm]current page.north west)
-            {\pgfuseimage{uvtlogo}};
+    \foreach \y in {0.5, -1.0, ..., -\ph} {
+        \pgfmathsetmacro{\yeven}{\y}
+        \foreach \x in {0, 1.5, ..., \pw} {
+            \node[inner sep=0, anchor=north west]
+                at ([xshift=\x cm, yshift=\yeven cm]current page.north west)
+                {\pgfuseimage{uvtlogo}};
+        }
+        \pgfmathsetmacro{\yodd}{\y - 0.75}
+        \foreach \x in {-0.85, 0.65, 2.15, ..., \pw} {
+            \node[inner sep=0, anchor=north west]
+                at ([xshift=\x cm, yshift=\yodd cm]current page.north west)
+                {\pgfuseimage{uvtlogo}};
+        }
     }
-    \pgfmathsetmacro{\yodd}{\y - 0.75}
-    \foreach \x in {-0.85, 0.65, 2.15, ..., \pw} {
-        \node[inner sep=0, anchor=north west]
-            at ([xshift=\x cm, yshift=\yodd cm]current page.north west)
-            {\pgfuseimage{uvtlogo}};
-    }
-}
-\end{scope}
+    \end{scope}
 
-% top-left logo
-\fill[UVTWhite]
-    ([xshift=0.5cm, yshift=-2cm]current page.north west)
-    rectangle
-    ([xshift=2cm, yshift=0cm]current page.north west);
-\node at ([xshift=1.25cm, yshift=-1.25cm]current page.north west)
-    {\includegraphics[width=1.5cm]{assets/logo-uvt-blue}};
-\end{tikzpicture}%
+    % top-left logo
+    \fill[UVTWhite]
+        ([xshift=0.5cm, yshift=-2cm]current page.north west)
+        rectangle
+        ([xshift=2cm, yshift=0cm]current page.north west);
+    \node at ([xshift=1.25cm, yshift=-1.25cm]current page.north west)
+        {\includegraphics[width=1.5cm]{assets/logo-uvt-blue}};
+    \end{tikzpicture}%
 }
 
 \defbeamertemplate{background}{uvtslide}{
