@@ -39,7 +39,7 @@ motto:
 assets: logo motto
 
 [private]
-logo_extract lang page:
+logo_background lang page:
     qpdf --empty \
         --pages '{{ LOGOSDIR }}/Logo UVT - 2017.pdf' {{ page }} -- \
         {{ LOGOSDIR }}/uvt-background-logo-black-{{ lang }}.pdf
@@ -78,13 +78,25 @@ logo_tile input output:
         "{{ LOGOSDIR }}/$(basename {{ without_extension(output) }}).png" \
         {{ output }}
 
+[private]
+logo_extract input output:
+    magick '{{ input }}' \
+        -gravity center -background transparent \
+        -extent 600x600 \
+        '{{ output }}-white.png'
+
+    magick '{{ output }}-white.png' \
+        -colorspace sRGB -fill '#002561' -fuzz 5% -opaque white \
+        '{{ output }}-blue.png'
+
 [doc("Download logos and preprocess them")]
 logo:
     @mkdir -p {{ LOGOSDIR }}
     unrar e -idq -o+ {{ LOGOSDIR }}/Logos.rar {{ LOGOSDIR }}/
-    @just logo_extract ro 14
-    @just logo_extract en 16
+    @just logo_background ro 14
+    @just logo_background en 16
     @just logo_tile '{{ LOGOSDIR }}/Asset 4@2x.png' 'assets/logo-uvt-tile.pdf'
+    @just logo_extract '{{ LOGOSDIR }}/Asset 4@2x.png' 'assets/logo-uvt'
 
 [doc("Update license text")]
 license:
