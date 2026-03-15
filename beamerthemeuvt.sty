@@ -252,7 +252,7 @@
 
 \defbeamertemplate{title page}{uvttitlepage}
 {
-    \vspace{0.55\paperheight}
+    \vspace{2cm}
     \begin{center}
         % title format
         \usebeamerfont{title}\usebeamercolor[fg]{title}
@@ -265,6 +265,18 @@
         \usebeamerfont{date}\insertdate%
         \@ifundefined{uvt@venue}{}{\par\usebeamerfont{venue}\uvt@venue}
     \end{center}
+
+    \begin{tikzpicture}[remember picture, overlay]
+    % top right
+    \node[anchor=north east, opacity=0.5]
+        at ([yshift=-0.25cm]current page.north east)
+        {\usebeamerfont{venue}\textcolor{UVTWhite}{\textbf{Universitatea de Vest din Timișoara}}};
+
+    % bottom left
+    \node[anchor=south west, opacity=0.5]
+        at ([yshift=0.25cm]current page.south west)
+        {\textcolor{UVTWhite}{\href{https://www.uvt.ro}{\textbf{www.uvt.ro}}}};
+    \end{tikzpicture}
 }
 
 \defbeamertemplate{section page}{uvtsectionpage}
@@ -284,20 +296,45 @@
 
 % <<< background
 
+% NOTE: this is here as a performance hack: it embeds the logo in the PDF once and we
+% can then just reuse it to create the pattern lower down. It should be a lot faster.
+\pgfdeclareimage[width=1.5cm]{uvtlogo}{assets/logo-uvt-tile.pdf}
+
 \defbeamertemplate{background}{uvttitlepage}
 {
-    \begin{tikzpicture}[remember picture, overlay]
-        \node [shading=axis,
-               rectangle,
-               left color=UVTDarkBlue,
-               right color=UVTLightBlue!70,
-               shading angle=45,
-               anchor=north,
-               minimum width=\paperwidth, minimum height=\paperheight]
-               (box) at (current page.north) {};
-        \node [opacity=0.5, anchor=north, yshift=-0.7cm] at (current page.north)
-            {\uvt@titlelogo};
-    \end{tikzpicture}
+\begin{tikzpicture}[remember picture, overlay]
+% background
+\fill[UVTBeamerDarkBlue] (current page.south west) rectangle (current page.north east);
+
+% pattern
+\begin{scope}[opacity=0.03]
+\pgfmathsetmacro{\pw}{\paperwidth / 1cm}
+\pgfmathsetmacro{\ph}{\paperheight / 1cm}
+
+\foreach \y in {0.5, -1.0, ..., -\ph} {
+    \pgfmathsetmacro{\yeven}{\y}
+    \foreach \x in {0, 1.5, ..., \pw} {
+        \node[inner sep=0, anchor=north west]
+            at ([xshift=\x cm, yshift=\yeven cm]current page.north west)
+            {\pgfuseimage{uvtlogo}};
+    }
+    \pgfmathsetmacro{\yodd}{\y - 0.75}
+    \foreach \x in {-0.85, 0.65, 2.15, ..., \pw} {
+        \node[inner sep=0, anchor=north west]
+            at ([xshift=\x cm, yshift=\yodd cm]current page.north west)
+            {\pgfuseimage{uvtlogo}};
+    }
+}
+\end{scope}
+
+% top-left logo
+\fill[UVTWhite]
+    ([xshift=0.5cm, yshift=-2cm]current page.north west)
+    rectangle
+    ([xshift=2cm, yshift=0cm]current page.north west);
+\node at ([xshift=1.25cm, yshift=-1.25cm]current page.north west)
+    {\includegraphics[width=1.5cm]{assets/logo-uvt-blue}};
+\end{tikzpicture}%
 }
 
 \defbeamertemplate{background}{uvtslide}{
