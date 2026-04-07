@@ -166,24 +166,7 @@
 % <<< outer: header / footer
 
 \defbeamertemplate*{frametitle}{uvtframe}{
-\nointerlineskip%
-\hbox to \paperwidth{%
-    \hskip 1.75cm\relax
-    \vbox to \dimexpr1.5cm + \dp\strutbox\relax{%
-        \vss
-        \ifx\insertframesubtitle\empty
-            {\usebeamerfont{frametitle}\usebeamercolor[fg]{frametitle}\insertframetitle\strut\par}
-            \vskip -4.25mm
-        \else
-            {\usebeamerfont{frametitle}\usebeamercolor[fg]{frametitle}\insertframetitle} \\
-            {\usebeamerfont{framesubtitle}\usebeamercolor[fg]{framesubtitle}\insertframesubtitle\strut\par}
-            \vskip -4mm
-        \fi
-    }
-}
-}
-
-\defbeamertemplate*{headline}{uvtframe}{
+    \nointerlineskip%
     \begin{tikzpicture}[remember picture, overlay]
     % top-left logo
     \fill[UVTBeamerDarkBlue]
@@ -193,6 +176,21 @@
     \node at ([xshift=1.25cm, yshift=-1.25cm]current page.north west)
         {\includegraphics[width=1.5cm]{assets/logo-uvt-white}};
     \end{tikzpicture}%
+    \hbox to \paperwidth{%
+        \hskip 1.75cm\relax
+        \vbox to \dimexpr1.5cm + \dp\strutbox\relax{%
+            \vss
+            \ifx\insertframesubtitle\empty
+                {\usebeamerfont{frametitle}\usebeamercolor[fg]{frametitle}\insertframetitle\strut\par}
+                \vskip -4.25mm
+            \else
+                {\usebeamerfont{frametitle}\usebeamercolor[fg]{frametitle}\insertframetitle} \\
+                {\usebeamerfont{framesubtitle}\usebeamercolor[fg]{framesubtitle}\insertframesubtitle\strut\par}
+                \vskip -4mm
+            \fi
+        }
+    }
+    \vskip\dimexpr0.15cm + \dp\strutbox\relax
 }
 
 \defbeamertemplate{footline}{uvtframe}{
