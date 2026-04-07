@@ -15,9 +15,8 @@ pdf basename:
 template:
     @just pdf template
 
-[doc("Compile image of example file (used in README)")]
-image: template
-    @rm -rf images/template-*.png
+[doc("Compile preview of example file (used in README)")]
+preview: template
     magick \
         -verbose \
         -density 300 \
@@ -27,16 +26,10 @@ image: template
         '{{ TEXOUTDIR }}/template-%02d.png'
     montage {{ TEXOUTDIR }}/template-*.png \
         -border 1 -tile 2x4 -geometry 1000x \
-        images/template.png
-
-[private]
-motto:
-    {{ TEXMK }} {{ TEXFLAGS }} images/uvt-motto.tex
-    pdfcrop --margins '0 -50 0 -520' {{ TEXOUTDIR }}/uvt-motto.pdf assets/uvt-motto-ro.pdf
-    pdfcrop --margins '0 1 0 -581' {{ TEXOUTDIR }}/uvt-motto.pdf assets/uvt-motto-en.pdf
+        template.png
 
 [doc("Rebuild assets")]
-assets: logo motto
+assets: logo
 
 [private]
 logo_background lang page:
@@ -112,12 +105,11 @@ zip:
 
 [doc("Remove all compilation files")]
 clean:
-    rm -rf {{ TEXOUTDIR }} images/{{ TEXOUTDIR }}
+    rm -rf {{ TEXOUTDIR }}
     rm -rf {{ LOGOSDIR }}
     rm -rf *.aux *.log *.out
 
 [doc("Remove all generated files")]
 purge: clean
-    rm -rf *.pdf images/*.pdf images/template.png
-    rm -rf assets/uvt-motto-*.pdf
+    rm -rf *.pdf template.png
     rm -rf assets/uvt-background-logo-*.png
