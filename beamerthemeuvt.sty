@@ -141,7 +141,7 @@
 \setbeamerfont{author}{size*={10.95}{13.14}, series=\bfseries}
 \setbeamerfont{date}{size*={10}{12}, series=\mdseries}
 
-\setbeamerfont{frametitle}{size*={20.74}{24.88}, series=\bfseries}
+\setbeamerfont{frametitle}{size*={14.4}{17.28}, series=\bfseries}
 \setbeamerfont{framesubtitle}{size*={10.95}{13.14}, series=\mdseries}
 
 \setbeamerfont{venue}{size=\small, series=\mdseries}
@@ -176,11 +176,11 @@
         \vss
         \ifx\insertframesubtitle\empty
             {\usebeamerfont{frametitle}\usebeamercolor[fg]{frametitle}\insertframetitle\strut\par}
-            \vskip 0.75mm
+            \vskip 0.25mm
         \else
             {\usebeamerfont{frametitle}\usebeamercolor[fg]{frametitle}\insertframetitle} \\
             {\usebeamerfont{framesubtitle}\usebeamercolor[fg]{framesubtitle}\insertframesubtitle\strut\par}
-            \vskip -2.75mm
+            \vskip -4mm
         \fi
     }
 }
@@ -195,14 +195,6 @@
         ([xshift=2cm, yshift=0cm]current page.north west);
     \node at ([xshift=1.25cm, yshift=-1.25cm]current page.north west)
         {\includegraphics[width=1.5cm]{assets/logo-uvt-white}};
-
-    % top right venue
-    \draw[UVTBeamerDarkBlue, thick]
-        ([xshift=-0.5cm, yshift=-0.5cm]current page.north east)
-        -- ([xshift=-8cm, yshift=-0.5cm]current page.north east);
-    \node[anchor=north east, inner xsep=0pt]
-        at ([xshift=-0.5cm, yshift=-0.1cm]current page.north east)
-        {\usebeamerfont{venue in head/foot}\usebeamercolor[fg]{framesubtitle}\uvt@venueupper};
     \end{tikzpicture}%
 }
 
