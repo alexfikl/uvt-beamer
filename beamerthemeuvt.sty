@@ -143,11 +143,12 @@
 
 \setbeamerfont{frametitle}{size*={14.4}{17.28}, series=\bfseries}
 \setbeamerfont{framesubtitle}{size*={10.95}{13.14}, series=\mdseries}
+\setbeamerfont{section title}{size=\LARGE,series=\bfseries}
 
 \setbeamerfont{venue in header}{size*={8}{9.6}, series=\bfseries}
 \setbeamerfont{text in footer}{size=\scriptsize,series=\bfseries}
 
-\setbeamerfont{section title}{size=\LARGE,series=\bfseries}
+\setbeamerfont{footnote}{size=\tiny}
 
 \setbeamerfont{alerted text} {series=\bfseries}
 \setbeamerfont{block title}{size=\relsize{+1},series=\bfseries}
@@ -204,18 +205,27 @@
         ([yshift=0.5cm]current page.south west)
         rectangle
         ([yshift=0.55cm]current page.south east);
-    \end{tikzpicture}
-    \begin{beamercolorbox}[wd=\paperwidth, ht=0.5cm]{}
-    \hspace{\beamer@leftmargin}%
-    \usebeamercolor[fg]{author in head/foot}%
-    \usebeamerfont{text in footer}%
-    \insertshortauthor%
-    \hfill%
-    \insertframenumber~/~\inserttotalframenumber%
-    \hfill%
-    \uvt@venueupper%
-    \hspace{\beamer@rightmargin}
-    \end{beamercolorbox}
+    \end{tikzpicture}%
+    \begin{beamercolorbox}[wd=0.2\paperwidth, ht=0.5cm, dp=0pt, left]{text in footer}%
+        \vbox to 0.4cm{\vfil
+            \hspace{\beamer@leftmargin}%
+            \usebeamerfont{text in footer}%
+            \insertshortauthor%
+        \vfil}%
+    \end{beamercolorbox}%
+    \begin{beamercolorbox}[wd=0.6\paperwidth, ht=0.5cm, dp=0pt, center]{text in footer}%
+        \vbox to 0.35cm{\vfil
+            \usebeamerfont{text in footer}%
+            \uvt@venueupper%
+        \vfil}%
+    \end{beamercolorbox}%
+    \begin{beamercolorbox}[wd=0.2\paperwidth, ht=0.5cm, dp=0pt, right,
+                           rightskip=\beamer@leftmargin]{text in footer}%
+        \vbox to 0.4cm{\vfil
+            \usebeamerfont{text in footer}%
+            \insertframenumber~/~\inserttotalframenumber%
+        \vfil}%
+    \end{beamercolorbox}%
 }
 \setbeamertemplate{footline}[uvtframe]
 
