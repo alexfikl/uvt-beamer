@@ -22,25 +22,22 @@ Templates in the same series:
 
 ## What it Looks Like
 
-[Full PDF](template.pdf)
-
-![template](images/template.png "Template")
+![template](template.png "UVT Beamer Presentation Template")
 
 ## How to Use It
 
-Copy the `beamerthemeuvt.sty` and the accompanying `beamercolorthemeuvt.sty` file
-to your local directory together with any relevant assets from the `assets` folder. You can
-use the `template.tex` file to get you started with a few useful options and examples.
-The `template.tex` can then be built with `PDFLaTeX` (or `XeLaTeX` or `LuaLaTeX`
-for the adventurous).
+Copy the `beamerthemeuvt.sty` and the accompanying `beamercolorthemeuvt.sty`
+file to your local directory together with any relevant assets from the
+`assets` folder. You can use the `template.tex` file to get you started with a
+few useful options and examples. The `template.tex` can then be built with
+`PDFLaTeX` (or `XeLaTeX` or `LuaLaTeX` for the adventurous).
 
 The package defines the following options used as `\usetheme[opts]{uvt}`.
 
 | Option                            | Description                           |
 | :-                                | :-                                    |
-| `nomyriadpro`                     | Do not load the *Myriad Pro* fonts    |
+| `helveticanow`                    | Attempt to load the the *Helvetica Now Display* fonts |
 | `language=<lang>`                 | One of *english* or *romanian*        |
-| `progressbar`                     | Adds a yellow progress bar in the footer |
 | `showframe`                       | Shows a frame around page elements (margins, etc.) |
 | `layoutgrid`                      | Adds a debug grid to check alignment  |
 
@@ -50,28 +47,28 @@ but care must be taken to size them nicely.
 
 | Macro                             | Description                           |
 | :-                                | :-                                    |
-| `\uvtheaderlogo`                  | Logo used in the header of each frame |
-| `\uvtmotto`                       | Colorful motto used in the footer of each slide |
-| `\uvttitlelogo`                   | Large logo used on the titlepage      |
 | `\uvtslidelogo`                   | Transparent logo used as background on slides |
-| `\venue`                          | Venue name (for the presentation) in title page |
+| `\venue`                          | Venue name (for the presentation) in footer |
 
 ## Fonts
 
-Note that, by default this uses the [Myriad Pro](https://fonts.adobe.com/fonts/myriad)
-font. This font is generally not available for free, but can be purchased from
-Adobe or a [reseller](https://www.fontspring.com/fonts/adobe/myriad-pro). The
-OTF fonts can be directly loaded by the `XeLaTeX` or `LuaLaTeX` engines. To
-get it working on `PDFLaTeX`, use the [FontPro](https://github.com/sebschub/FontPro)
-distribution. If you cannot obtain the font (or the installation does not work
-for some reason), it can be disabled with the `nomyriadpro` option. When the font
-is not found, the class falls back to using `\usepackage{helvet}`, which loads a
-Helvetica look-alike called Nimbus Sans L.
+Note that the Official Manual recommends the [Helvetica Display
+Now](https://www.monotype.com/fonts/helvetica-now) font. This font is generally
+not available for free, but can be purchased from Monotype or a
+[reseller](https://www.myfonts.com/collections/helvetica-now-font-monotype-imaging).
+Ideally, you can get it from the university for official documents. If you
+managed to get it, you will need to use the `XeLaTeX` or `LuaLaTeX` engines to
+load it (since `PDFLaTeX` does not support OTF or TTF fonts).
+
+If you do not have the recommended font, a good alternative is the open source
+`TeX Gyre Heros` font (a quality classic Helvetica clone). This is loaded by
+default by the template if the `helveticanow` option is not given or if the
+font is not found.
 
 If you are using `XeLaTeX` or `LuaLaTeX`, there are many other nice fonts to
 keep in mind that would work well. For example: Carlito (a Calibri clone),
 Caladea (a Cambria clone), Montserrat (inspired by Gotham), Adobe Source Sans,
-etc. A nice font will always make your presentation look nicer!
+and many others. A nice font will always make your slides look nicer!
 
 ## License
 

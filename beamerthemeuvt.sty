@@ -30,8 +30,6 @@
 
 % enable Helvetica Now Display
 \DeclareBoolOption[false]{helveticanow}
-% show progressbar in the footer
-\DeclareBoolOption[false]{progressbar}
 % select language for logos
 \DeclareStringOption[english]{language}
 % show a debug layout grid
@@ -77,11 +75,7 @@
 
 % <<< commands
 
-\ProvideDocumentCommand \uvtheaderlogo { m } {\def\uvt@headerlogo{#1}}
-\ProvideDocumentCommand \uvtmotto { m } {\def\uvt@motto{#1}}
-\ProvideDocumentCommand \uvttitlelogo { m } {\def\uvt@titlelogo{#1}}
 \ProvideDocumentCommand \uvtslidelogo { m } {\def\uvt@slidelogo{#1}}
-
 \ProvideDocumentCommand \venue { m } {\def\uvt@venueupper{\MakeUppercase{#1}}}
 
 % >>>
@@ -89,18 +83,12 @@
 % <<< assets
 
 \ifthenelse{\equal{\uvt@language}{english}}{
-    \uvtheaderlogo{\includegraphics[width=0.2\paperwidth]{assets/uvt-logo-en}}
-    \uvtmotto{\includegraphics[width=0.2\paperwidth]{assets/uvt-motto-en}}
-    \uvttitlelogo{\includegraphics[width=0.45\paperheight]{assets/uvt-background-logo-white-en}}
+    \ProvideDocumentCommand \PageWord {} {Page}
     \uvtslidelogo{\includegraphics[width=0.55\paperheight]{assets/uvt-background-logo-black-en}}
-    \def\uvt@mottospacing{\hspace{0.75\beamer@rightmargin}\vspace*{-7.5pt}}
 }{
 \ifthenelse{\equal{\uvt@language}{romanian}}{
-    \uvtheaderlogo{\includegraphics[width=0.2\paperwidth]{assets/uvt-logo-ro}}
-    \uvtmotto{\includegraphics[width=0.2\paperwidth]{assets/uvt-motto-ro}}
-    \uvttitlelogo{\includegraphics[width=0.45\paperheight]{assets/uvt-background-logo-white-ro}}
+    \ProvideDocumentCommand \PageWord {} {Pagina}
     \uvtslidelogo{\includegraphics[width=0.55\paperheight]{assets/uvt-background-logo-black-ro}}
-    \def\uvt@mottospacing{\hspace{1.0\beamer@rightmargin}\vspace*{-0.5\beamer@rightmargin}}
 }{
     \PackageError{beamerthemeuvt}{Unknown language `\uvt@language`}{}
 }}
@@ -215,7 +203,7 @@
                            rightskip=\beamer@leftmargin]{text in footer}%
         \vbox to 0.4cm{\vfil
             \usebeamerfont{text in footer}%
-            Page \insertframenumber~/~\inserttotalframenumber%
+            \PageWord{} \insertframenumber~/~\inserttotalframenumber%
         \vfil}%
     \end{beamercolorbox}%
 }
