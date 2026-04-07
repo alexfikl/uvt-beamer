@@ -107,7 +107,7 @@
 \ifuvt@helveticanow
     \ifpdftex
         \PackageWarning{uvt-letterhead}{HelveticaNowDisplay font is not available on pdfLaTeX. Remove the 'helveticanow' option to silence this warning or switch to LuaLaTeX / XeLaTex.}
-        \RequirePackage[scaled=0.9]{tgheros}
+        \RequirePackage[scale=0.9]{tgheros}
     \else
         \IfFontExistsTF{HelveticaNowDisplay}{
             \setsansfont[Ligatures=TeX]{HelveticaNowDisplay}
@@ -117,7 +117,7 @@
     \fi
 \else
     \ifpdftex
-        \RequirePackage[scaled=0.9]{tgheros}
+        \RequirePackage[scale=0.9]{tgheros}
     \else
         \setsansfont[Scale=0.9]{TeX Gyre Heros}
     \fi
