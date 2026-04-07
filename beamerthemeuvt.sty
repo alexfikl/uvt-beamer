@@ -144,18 +144,14 @@
 \setbeamerfont{frametitle}{size*={14.4}{17.28}, series=\bfseries}
 \setbeamerfont{framesubtitle}{size*={10.95}{13.14}, series=\mdseries}
 
-\setbeamerfont{venue}{size=\small, series=\mdseries}
-\setbeamerfont{venue in head/foot}{size*={8}{9.6}, series=\bfseries}
+\setbeamerfont{venue in header}{size*={8}{9.6}, series=\bfseries}
+\setbeamerfont{text in footer}{size=\scriptsize,series=\bfseries}
 
 \setbeamerfont{section title}{size=\LARGE,series=\bfseries}
 
 \setbeamerfont{alerted text} {series=\bfseries}
 \setbeamerfont{block title}{size=\relsize{+1},series=\bfseries}
 \setbeamerfont{block title alerted}{size=\relsize{+1},series=\bfseries}
-
-\setbeamerfont{page number in head/foot}{size=\tiny, series=\bfseries}
-\setbeamerfont{url text}{size=\scriptsize,series=\bfseries}
-\setbeamerfont{author in head/foot}{size=\scriptsize,series=\bfseries}
 
 \setbeamerfont{enumerate item}{size={}, series=\bfseries}
 \setbeamerfont{description item}{size={}, series=\bfseries}
@@ -199,6 +195,27 @@
 }
 
 \defbeamertemplate{footline}{uvtframe}{
+    \begin{tikzpicture}[remember picture, overlay]
+    \fill[UVTBeamerDarkBlue]
+        (current page.south west)
+        rectangle
+        ([yshift=0.5cm]current page.south east);
+    \fill[UVTBeamerDarkGray]
+        ([yshift=0.5cm]current page.south west)
+        rectangle
+        ([yshift=0.55cm]current page.south east);
+    \end{tikzpicture}
+    \begin{beamercolorbox}[wd=\paperwidth, ht=0.5cm]{}
+    \hspace{\beamer@leftmargin}%
+    \usebeamercolor[fg]{author in head/foot}%
+    \usebeamerfont{text in footer}%
+    \insertshortauthor%
+    \hfill%
+    \insertframenumber~/~\inserttotalframenumber%
+    \hfill%
+    \uvt@venueupper%
+    \hspace{\beamer@rightmargin}
+    \end{beamercolorbox}
 }
 \setbeamertemplate{footline}[uvtframe]
 
@@ -237,7 +254,7 @@
     % top right
     \node[anchor=north east, opacity=0.5, inner xsep=0pt]
         at ([xshift=-0.5cm, yshift=-0.1cm]current page.north east)
-        {\usebeamerfont{venue in head/foot}\textcolor{UVTWhite}{{\textbf{\uvt@venueupper}}}};
+        {\usebeamerfont{venue in header}\textcolor{UVTWhite}{{\textbf{\uvt@venueupper}}}};
 
     % bottom left
     \node[anchor=south west, opacity=0.5, inner xsep=0pt]
@@ -415,8 +432,8 @@
 % >>>
 
 \setbeamersize{
-    text margin left=1.25cm,
-    text margin right=.05\paperwidth,
+    text margin left=0.5cm,
+    text margin right=0.5cm,
     description width=0.075\paperwidth,
     }
 \setlength{\labelsep}{\dimexpr\labelsep - 0.2em\relax}
