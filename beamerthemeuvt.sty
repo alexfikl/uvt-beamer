@@ -1,4 +1,5 @@
 % SPDX-FileCopyrightText: 2023 Alexandru Fikl <alexfikl@gmail.com>
+% SPDX-FileCopyrightText: 2016-2017 Robert Baumgarth
 % SPDX-License-Identifier: CC-BY-4.0
 %
 % This package reproduces the UVT (West University of Timișoara) Power Point
@@ -12,6 +13,9 @@
 %
 % Some other implementations:
 %   https://assets-global.website-files.com/641d7b12606bf729cb75f481/6458b9620be9f8af5b003f00_Cercetare%20in%20educatie.pdf
+%
+% The nifty progress bar on top was stolen from
+%   https://github.com/vipowueb/minflat-beamer
 
 \def\fileversion{v0.4}
 \def\filedate{2025/10/26}
@@ -30,6 +34,8 @@
 
 % enable Helvetica Now Display
 \DeclareBoolOption[false]{helveticanow}
+% show progressbar in the header
+\DeclareBoolOption[false]{progressbar}
 % select language for logos
 \DeclareStringOption[english]{language}
 % show a debug layout grid
@@ -153,6 +159,60 @@
 
 % <<< outer: header / footer
 
+\newdimen\uvt@sectionxshift
+
+\def\uvt@sectionmarkers{%
+    % ##1=section index, ##2=title, ##3=start page, ##5=part
+    \def\sectionentry##1##2##3##4##5{%
+        \ifnum##5=\c@part\relax
+            \uvt@sectionxshift=\dimexpr(\paperwidth - 2.75cm) * ##3 / \inserttotalframenumber\relax%
+            \ifnum\c@section=##1\relax
+                % current section: filled dot, bold name
+                \draw[draw=white, fill=white]
+                    ([xshift=\uvt@sectionxshift, yshift=\uvt@circleoffset]current page.north west)
+                    circle [radius=5pt];
+                \draw[draw=UVTLightBlue, fill=UVTLightBlue]
+                    ([xshift=\uvt@sectionxshift, yshift=\uvt@circleoffset]current page.north west)
+                    circle [radius=3pt];
+            \else
+                \draw[draw=white, fill=white]
+                    ([xshift=\uvt@sectionxshift, yshift=\uvt@circleoffset]current page.north west)
+                    circle [radius=5pt];
+                \draw[draw=UVTLightBlue, fill=white, thick]
+                    ([xshift=\uvt@sectionxshift, yshift=\uvt@circleoffset]current page.north west)
+                    circle [radius=3pt];
+            \fi
+        \fi
+    }%
+    \def\slideentry##1##2##3##4##5##6{}%
+    \def\beamer@subsectionentry##1##2##3##4##5{}%
+    \dohead%
+}
+
+\defbeamertemplate{headline}{uvtprogressbar}{%
+    % Everything is drawn via a TikZ overlay so the headline produces no flow
+    % content and the frametitle position is unaffected.
+    % \uvt@baroffset controls how far below the top edge the bar sits.
+    \def\uvt@baroffset{-0.23cm}%
+    \def\uvt@circleoffset{-0.275cm}%
+    \begin{tikzpicture}[remember picture, overlay]
+        % background track
+        \fill[UVTBeamerLightGray]
+            ([xshift=2.25cm, yshift=\uvt@baroffset]current page.north west)
+            rectangle
+            ([xshift=-0.5cm,
+              yshift=\dimexpr\uvt@baroffset-2pt\relax]current page.north east);
+        % filled progress portion
+        \fill[UVTDarkBlue]
+            ([xshift=2.25cm, yshift=\uvt@baroffset]current page.north west)
+            rectangle
+            ([xshift=\dimexpr(\paperwidth-2.25cm)*(\insertframenumber+1)/\inserttotalframenumber\relax,%
+              yshift=\dimexpr\uvt@baroffset-2pt\relax]current page.north west);
+        % section dots
+        \uvt@sectionmarkers%
+    \end{tikzpicture}%
+}
+
 \defbeamertemplate*{frametitle}{uvtframe}{
     \nointerlineskip%
     \begin{tikzpicture}[remember picture, overlay]
@@ -164,6 +224,7 @@
     \node at ([xshift=1.25cm, yshift=-0.75cm]current page.north west)
         {\includegraphics[width=1.5cm]{assets/logo-uvt-white}};
     \end{tikzpicture}%
+    % frametitle
     \hbox to \paperwidth{%
         \hskip 1.75cm\relax
         \vbox to \dimexpr1.0cm + \dp\strutbox\relax{%
@@ -208,6 +269,10 @@
     \end{beamercolorbox}%
 }
 \setbeamertemplate{footline}[uvtframe]
+
+\ifuvt@progressbar
+    \setbeamertemplate{headline}[uvtprogressbar]
+\fi
 
 % >>>
 
