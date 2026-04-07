@@ -202,10 +202,47 @@ You can also do an alerted reveal with \texttt{[<+- | alert@+>]}.
 
 \begin{frame}{UVT Theme: Math and Coding}
 \framesubtitle{Example Math Mode Formatting}
+
+Inline math looks clean: the solution to $ax^2 + bx + c = 0$ is
+$x = \dfrac{-b \pm \sqrt{b^2 - 4ac}}{2a}$.
+
+\bigskip
+Display equations are centered and numbered:
+\begin{equation}
+    \int_{-\infty}^{\infty} e^{-x^2}\, \mathrm{d}x = \sqrt{\pi}.
+\end{equation}
+
+\bigskip
+Aligned multi-line derivations work too:
+\begin{align*}
+    e^{i\theta} & = \cos\theta + i\sin\theta, \\
+    e^{i\pi} + 1 & = 0.
+\end{align*}
+
 \end{frame}
 
-\begin{frame}{UVT Theme: Math and Coding}
+\begin{frame}[fragile]{UVT Theme: Math and Coding}
 \framesubtitle{Example Code Listing}
+
+\begin{lstlisting}[language=Python,
+                   caption={Newton's method in Python},
+                   linewidth=0.9\textwidth,
+                   xleftmargin=0.1\textwidth,
+                   basicstyle=\ttfamily\footnotesize]
+def newton(f, df, x0, tol=1e-9, max_iter=100):
+    """Find a root of f using Newton's method."""
+    x = x0
+    for _ in range(max_iter):
+        fx = f(x)
+        if abs(fx) < tol:
+            return x  # converged
+        x -= fx / df(x)
+    raise RuntimeError("Did not converge")
+
+# Example: sqrt(2) as root of x^2 - 2
+root = newton(lambda x: x**2 - 2, lambda x: 2*x, x0=1.0)
+\end{lstlisting}
+
 \end{frame}
 
 \end{document}
