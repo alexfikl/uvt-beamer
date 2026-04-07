@@ -346,36 +346,20 @@
 
 % <<< itemize
 
-% FIXME: figure out how to ensure that the bullets are actually in the middle of
-% the text line
-
-\def\uvt@itemsize{0.5ex}
 \setbeamertemplate{itemize item}{
-    \tikz{
-        \draw[fill=UVTBeamerYellow, draw=none] (0, 0) rectangle ++(\uvt@itemsize, \uvt@itemsize);
-        \draw[fill=UVTBeamerYellow, draw=none] (\uvt@itemsize, \uvt@itemsize) rectangle ++(\uvt@itemsize, \uvt@itemsize);
-        \draw[fill=UVTBeamerYellow, draw=none] (0, 2*\uvt@itemsize) rectangle ++(\uvt@itemsize, \uvt@itemsize);
+    \tikz[baseline=-0.65ex]{
+        % circle
+        \node[
+        circle,
+        minimum size=1ex,
+        inner sep=0pt,
+        draw=UVTDarkBlue
+        ] (c) {};
     }
 }
 
-\def\uvt@subitemsize{0.35ex}
-\setbeamertemplate{itemize subitem}{
-    \tikz{
-        \draw[fill=white, draw=none] (0, -0.5*\uvt@subitemsize) rectangle ++(0.01, 0.01);
-        \draw[fill=UVTDarkBlue, draw=none] (0, 0) rectangle ++(\uvt@subitemsize, \uvt@subitemsize);
-        \draw[fill=UVTDarkBlue, draw=none] (\uvt@subitemsize, \uvt@subitemsize) rectangle ++(\uvt@subitemsize, \uvt@subitemsize);
-        \draw[fill=UVTDarkBlue, draw=none] (0, 2*\uvt@subitemsize) rectangle ++(\uvt@subitemsize, \uvt@subitemsize);
-    }
-}
-
-\setbeamertemplate{itemize subsubitem}{
-    \tikz{
-        \draw[fill=white, draw=none] (0, -0.5*\uvt@subitemsize) rectangle ++(0.01, 0.01);
-        \draw[fill=white, draw=none] (0, 0) rectangle ++(\uvt@subitemsize, \uvt@subitemsize);
-        \draw[fill=UVTLightBlue, draw=none] (\uvt@subitemsize, \uvt@subitemsize) rectangle ++(\uvt@subitemsize, \uvt@subitemsize);
-        \draw[fill=white, draw=none] (0, 2*\uvt@subitemsize) rectangle ++(\uvt@subitemsize, \uvt@subitemsize);
-    }
-}
+\setbeamertemplate{itemize subitem}{\color{UVTDarkBlue}\small $\bullet$}
+\setbeamertemplate{itemize subsubitem}{\color{UVTSkyBlue}\small $\bullet$}
 
 % >>>
 
