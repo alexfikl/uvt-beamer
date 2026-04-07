@@ -186,22 +186,22 @@
     \fill[UVTBeamerDarkBlue]
         (current page.south west)
         rectangle
-        ([yshift=0.5cm]current page.south east);
+        ([yshift=0.4cm]current page.south east);
     \fill[UVTBeamerDarkGray]
-        ([yshift=0.5cm]current page.south west)
+        ([yshift=0.4cm]current page.south west)
         rectangle
-        ([yshift=0.55cm]current page.south east);
+        ([yshift=0.45cm]current page.south east);
     \end{tikzpicture}%
-    \begin{beamercolorbox}[wd=0.8\paperwidth, ht=0.5cm, dp=0pt, left]{text in footer}%
-        \vbox to 0.45cm{\vfil
+    \begin{beamercolorbox}[wd=0.8\paperwidth, dp=0pt, left]{text in footer}%
+        \vbox to 0.3cm{\vfil
             \hspace{\beamer@leftmargin}%
             \usebeamerfont{text in footer}%
-            \insertshortauthor ~~{\usebeamerfont{author}|}~ \uvt@venueupper%
+            \insertshortauthor ~~~---~~ \uvt@venueupper%
         \vfil}%
     \end{beamercolorbox}%
-    \begin{beamercolorbox}[wd=0.2\paperwidth, ht=0.5cm, dp=0pt, right,
+    \begin{beamercolorbox}[wd=0.2\paperwidth, dp=0pt, right,
                            rightskip=\beamer@leftmargin]{text in footer}%
-        \vbox to 0.4cm{\vfil
+        \vbox to 0.3cm{\vfil
             \usebeamerfont{text in footer}%
             \PageWord{} \insertframenumber~/~\inserttotalframenumber%
         \vfil}%
