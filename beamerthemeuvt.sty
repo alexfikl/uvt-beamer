@@ -170,15 +170,15 @@
     \begin{tikzpicture}[remember picture, overlay]
     % top-left logo
     \fill[UVTBeamerDarkBlue]
-        ([xshift=0.5cm, yshift=-2cm]current page.north west)
+        ([xshift=0.5cm, yshift=-1.5cm]current page.north west)
         rectangle
         ([xshift=2cm, yshift=0cm]current page.north west);
-    \node at ([xshift=1.25cm, yshift=-1.25cm]current page.north west)
+    \node at ([xshift=1.25cm, yshift=-0.75cm]current page.north west)
         {\includegraphics[width=1.5cm]{assets/logo-uvt-white}};
     \end{tikzpicture}%
     \hbox to \paperwidth{%
         \hskip 1.75cm\relax
-        \vbox to \dimexpr1.5cm + \dp\strutbox\relax{%
+        \vbox to \dimexpr1.0cm + \dp\strutbox\relax{%
             \vss
             \ifx\insertframesubtitle\empty
                 {\usebeamerfont{frametitle}\usebeamercolor[fg]{frametitle}\insertframetitle\strut\par}
@@ -328,10 +328,10 @@
 
     % top-left logo
     \fill[UVTWhite]
-        ([xshift=0.5cm, yshift=-2cm]current page.north west)
+        ([xshift=0.5cm, yshift=-1.5cm]current page.north west)
         rectangle
         ([xshift=2cm, yshift=0cm]current page.north west);
-    \node at ([xshift=1.25cm, yshift=-1.25cm]current page.north west)
+    \node at ([xshift=1.25cm, yshift=-0.75cm]current page.north west)
         {\includegraphics[width=1.5cm]{assets/logo-uvt-blue}};
     \end{tikzpicture}%
 }
