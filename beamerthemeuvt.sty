@@ -162,12 +162,14 @@
 \newdimen\uvt@sectionxshift
 
 \def\uvt@sectionmarkers{%
-    % ##1=section index, ##2=title, ##3=start page, ##5=part
+    \def\sectionentry##1##2##3##4##5{}%
+    \def\slideentry##1##2##3##4##5##6{}%
+    \def\beamer@subsectionentry##1##2##3##4##5{}%
+    \dohead%
     \def\sectionentry##1##2##3##4##5{%
         \ifnum##5=\c@part\relax
-            \uvt@sectionxshift=\dimexpr(\paperwidth - 2.75cm) * ##3 / \inserttotalframenumber\relax%
+            \uvt@sectionxshift=\dimexpr2.25cm+(\paperwidth-2.75cm)*(##3+1)/\beamer@endpageofdocument\relax%
             \ifnum\c@section=##1\relax
-                % current section: filled dot, bold name
                 \draw[draw=white, fill=white]
                     ([xshift=\uvt@sectionxshift, yshift=\uvt@circleoffset]current page.north west)
                     circle [radius=5pt];
@@ -184,16 +186,11 @@
             \fi
         \fi
     }%
-    \def\slideentry##1##2##3##4##5##6{}%
-    \def\beamer@subsectionentry##1##2##3##4##5{}%
     \dohead%
 }
 
 \defbeamertemplate{headline}{uvtprogressbar}{%
-    % Everything is drawn via a TikZ overlay so the headline produces no flow
-    % content and the frametitle position is unaffected.
-    % \uvt@baroffset controls how far below the top edge the bar sits.
-    \def\uvt@baroffset{-0.23cm}%
+    \def\uvt@baroffset{-0.24cm}%
     \def\uvt@circleoffset{-0.275cm}%
     \begin{tikzpicture}[remember picture, overlay]
         % background track
@@ -201,13 +198,13 @@
             ([xshift=2.25cm, yshift=\uvt@baroffset]current page.north west)
             rectangle
             ([xshift=-0.5cm,
-              yshift=\dimexpr\uvt@baroffset-2pt\relax]current page.north east);
+              yshift=\dimexpr\uvt@baroffset-1.5pt\relax]current page.north east);
         % filled progress portion
         \fill[UVTDarkBlue]
             ([xshift=2.25cm, yshift=\uvt@baroffset]current page.north west)
             rectangle
-            ([xshift=\dimexpr(\paperwidth-2.25cm)*(\insertframenumber+1)/\inserttotalframenumber\relax,%
-              yshift=\dimexpr\uvt@baroffset-2pt\relax]current page.north west);
+            ([xshift=\dimexpr2.25cm+(\paperwidth-2.75cm)*\thepage/\beamer@endpageofdocument\relax,%
+              yshift=\dimexpr\uvt@baroffset-1.5pt\relax]current page.north west);
         % section dots
         \uvt@sectionmarkers%
     \end{tikzpicture}%
