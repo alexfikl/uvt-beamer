@@ -58,9 +58,6 @@
 
 % nicer command definitions
 \RequirePackage{xparse}
-% used in defining blocks
-\RequirePackage{adjustbox}
-\RequirePackage{colortbl}
 
 \ifuvt@showframe
     \RequirePackage{showframe}
@@ -176,8 +173,9 @@
 \setbeamerfont{footnote}{size=\tiny}
 
 \setbeamerfont{alerted text} {series=\bfseries}
-\setbeamerfont{block title}{size=\relsize{+1}, series=\bfseries}
-\setbeamerfont{block title alerted}{size=\relsize{+1}, series=\bfseries}
+\setbeamerfont{block title}{series=\bfseries}
+\setbeamerfont{block title alerted}{series=\bfseries}
+\setbeamerfont{block title example}{series=\bfseries}
 
 \setbeamerfont{enumerate item}{size=\normalsize, series=\bfseries}
 \setbeamerfont{description item}{size=\normalsize, series=\bfseries}
@@ -461,49 +459,6 @@
 
 \setbeamertemplate{itemize subitem}{\color{UVTDarkBlue}\small $\bullet$}
 \setbeamertemplate{itemize subsubitem}{\color{UVTSkyBlue}\small $\bullet$}
-
-% >>>
-
-% <<< blocks
-
-\setbeamertemplate{block begin}{
-    \begin{adjustbox}{max width=0.98\textwidth}
-        \begin{tabular}{!{\color{UVTDarkBlue}{\vrule width 4pt}}>{\columncolor[gray]{0.97}}m{\textwidth}}
-    	    \begin{beamercolorbox}{block title}
-                \usebeamerfont*{block title}
-                \vbox{}\vskip 0.05ex
-                \insertblocktitle
-                \vbox{}\vskip 0.2ex
-            \end{beamercolorbox}
-            \usebeamerfont*{block text}
-}
-\setbeamertemplate{block end}{\end{tabular}\end{adjustbox}}
-
-\setbeamertemplate{block alerted begin}{
-    \begin{adjustbox}{max width=0.98\textwidth}
-        \begin{tabular}{!{\color{UVTBeamerYellow}{\vrule width 4pt}}>{\columncolor[gray]{0.97}}m{\textwidth}}
-    	    \begin{beamercolorbox}{alerted text}
-                \usebeamerfont*{block title}
-                \vbox{}\vskip 0.05ex
-                \insertblocktitle
-                \vbox{}\vskip 0.2ex
-            \end{beamercolorbox}
-            \usebeamerfont*{block text}
-}
-\setbeamertemplate{block alerted end}{\end{tabular}\end{adjustbox}}
-
-\setbeamertemplate{block example begin}{
-    \begin{adjustbox}{max width=0.98\textwidth}
-        \begin{tabular}{!{\color{UVTLightBlue}{\vrule width 4pt}}>{\columncolor[gray]{0.97}}m{\textwidth}}
-    	    \begin{beamercolorbox}{example text}
-                \usebeamerfont*{block title}
-                \vbox{}\vskip 0.05ex
-                \insertblocktitle
-                \vbox{}\vskip 0.2ex
-            \end{beamercolorbox}
-            \usebeamerfont*{block text}
-}
-\setbeamertemplate{block example end}{\end{tabular}\end{adjustbox}}
 
 % >>>
 
