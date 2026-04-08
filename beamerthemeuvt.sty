@@ -462,6 +462,31 @@
 
 % >>>
 
+% <<< theorems
+
+\AtBeginEnvironment{definition}{%
+  \setbeamercolor{block body}{bg=UVTAccentWhite}
+  \setbeamercolor{block title}{fg=black,bg=UVTBeamerDarkGray!50}
+}
+
+\AtBeginEnvironment{theorem}{%
+  \setbeamercolor{block body}{bg=UVTAccentWhite}
+  \setbeamercolor{block title}{fg=white,bg=UVTBeamerDarkBlue}
+}
+
+\AtBeginEnvironment{lemma}{%
+  \setbeamercolor{block body}{bg=UVTAccentWhite}
+  \setbeamercolor{block title}{fg=white,bg=UVTSkyBlue}
+}
+
+\AtBeginEnvironment{proposition}{%
+  \setbeamercolor{block body}{bg=UVTAccentWhite}
+  \setbeamercolor{block title}{fg=white,bg=UVTSkyBlue}
+}
+
+
+% >>>
+
 % <<< figures
 
 % disable "Figure:" in the captions
