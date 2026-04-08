@@ -35,6 +35,8 @@
 \DeclareBoolOption[false]{helveticanow}
 % show progressbar in the header
 \DeclareBoolOption[false]{progressbar}
+% show toc in the section pages
+\DeclareBoolOption[false]{sectiontoc}
 % select language for logos
 \DeclareStringOption[english]{language}
 % show a debug layout grid
@@ -364,11 +366,28 @@
 \defbeamertemplate{section page}{uvtsectionpage}
 {
     \vfill
-    \vspace{2cm}
-    \begin{center}
-        \usebeamerfont{section title}\usebeamercolor[fg]{section title}
-        \insertsectionhead\par
-    \end{center}
+    \ifuvt@sectiontoc
+        \vspace{1cm}
+        \begin{center}
+            \setbeamercolor{section in toc}{fg=UVTWhite}
+            \setbeamercolor{section in toc shaded}{fg=UVTWhite}
+            \setbeamerfont{section in toc}{size=\LARGE, series=\bfseries}
+            \setbeamerfont{section in toc shaded}{size=\LARGE, series=\mdseries}
+            \setbeamertemplate{section in toc shaded}{%
+                \textcolor{UVTWhite!30!UVTBeamerDarkBlue}{\inserttocsection}\par}
+            \tableofcontents[
+                currentsection,
+                sectionstyle=show/shaded,
+                subsectionstyle=hide,
+            ]
+        \end{center}
+    \else
+        \vspace{2cm}
+        \begin{center}
+            \usebeamerfont{section title}\usebeamercolor[fg]{section title}
+            \insertsectionhead\par
+        \end{center}
+    \fi
     \vfill
 }
 
