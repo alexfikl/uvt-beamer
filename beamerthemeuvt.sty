@@ -118,10 +118,12 @@
 
 \ifthenelse{\equal{\uvt@language}{english}}{
     \ProvideDocumentCommand \PageWord {} {Page}
+    \venue{West University of Timișoara}
     \uvtslidelogo{\includegraphics[width=0.55\paperheight]{assets/uvt-background-logo-black-en}}
 }{
 \ifthenelse{\equal{\uvt@language}{romanian}}{
     \ProvideDocumentCommand \PageWord {} {Pagina}
+    \venue{Universitatea de Vest din Timișoara}
     \uvtslidelogo{\includegraphics[width=0.55\paperheight]{assets/uvt-background-logo-black-ro}}
 }{
     \PackageError{beamerthemeuvt}{Unknown language `\uvt@language`}{}
