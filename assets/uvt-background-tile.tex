@@ -1,0 +1,72 @@
+% SPDX-FileCopyrightText: 2026 Alexandru Fikl <alexfikl@gmail.com>
+% SPDX-License-Identifier: CC-BY-4.0
+
+\documentclass{article}
+
+% NOTE: size chosen so that it comfortably fits a beamer with 16:9 aspect ratio
+\usepackage[paperwidth=165mm, paperheight=110mm, margin=0pt]{geometry}
+
+\usepackage{tikz}
+\usepackage{xcolor}
+
+% see beamercolorthemeuvt.sty
+\definecolor{UVTBeamerDarkBlue}{RGB}{0, 37, 97}
+
+\pagestyle{empty}
+
+% embed the logo PDF once as a named Form XObject
+\pgfdeclareimage[width=1cm]{uvtlogo}{logo-uvt-tile.pdf}
+
+% get logo dimensions
+\newlength{\logoW}
+\newlength{\logoH}
+\settowidth{\logoW}{\pgfuseimage{uvtlogo}}
+\settoheight{\logoH}{\pgfuseimage{uvtlogo}}
+
+% Pinwheel cell size: (W+H) x (W+H).
+\newlength{\cellS}
+\setlength{\cellS}{\logoW}
+\addtolength{\cellS}{\logoH}
+
+\begin{document}
+\begin{tikzpicture}[remember picture, overlay]
+% background
+\fill[UVTBeamerDarkBlue] (current page.south west) rectangle (current page.north east);
+
+% pattern - tile the pinwheel cell across the full page.
+\begin{scope}[opacity=0.03]
+\pgfmathsetmacro{\pw}{\paperwidth/1pt}
+\pgfmathsetmacro{\ph}{\paperheight/1pt}
+\pgfmathsetmacro{\cs}{\cellS/1pt}
+
+\foreach \cy in {0, -\cs, ..., -\ph} {
+  \foreach \cx in {0, \cs, ..., \pw} {
+    \foreach \dx/\dy in {0pt/0pt, -0.5\cellS/0.5\cellS} {
+      % 0deg
+      \node[inner sep=0, anchor=north west]
+        at ([xshift=\cx pt + \dx + \logoH - 12pt, yshift=\cy pt + \dy + 10.5pt]current page.north west)
+        {\pgfuseimage{uvtlogo}};
+
+      % 90deg
+      \node[inner sep=0, anchor=north west]
+        at ([xshift=\cx pt + \dx + 1.25\logoW - 7.3pt, yshift=\cy pt + \dy + 5pt]current page.north west)
+        {\rotatebox{90}{\pgfuseimage{uvtlogo}}};
+
+      % 180deg
+      \node[inner sep=0, anchor=north west]
+        at ([xshift=\cx pt + \dx + \logoW - 19pt, yshift=\cy pt + \dy + 21.5pt - \logoW]current page.north west)
+        {\rotatebox{180}{\pgfuseimage{uvtlogo}}};
+
+      % 270deg
+      \node[inner sep=0, anchor=north west]
+        at ([xshift=\cx pt + \dx + 0.25\logoW - 9.5pt, yshift=\cy pt + \dy - 0.5\logoH + 16pt]current page.north west)
+        {\rotatebox{270}{\pgfuseimage{uvtlogo}}};
+    }
+  }
+}
+\end{scope}
+
+\end{tikzpicture}
+\end{document}
+
+% vim: foldmethod=marker foldmarker=<<<,>>>

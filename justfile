@@ -29,7 +29,17 @@ preview: template
         template.png
 
 [doc("Rebuild assets")]
-assets: logo
+assets: logo background_tile
+
+[private]
+background_tile:
+    #!/usr/bin/env bash
+    set -euo pipefail
+
+    cd assets
+    {{ TEXMK }} -pdflua -output-directory=../{{ TEXOUTDIR }} uvt-background-tile.tex
+    cp ../{{ TEXOUTDIR }}/uvt-background-tile.pdf uvt-background-tile.pdf
+
 
 [private]
 logo_background lang page:
@@ -46,30 +56,23 @@ logo_background lang page:
         assets/uvt-background-logo-white-{{ lang }}.png
 
 [private]
-logo_tile input output:
+logo_tile input page output:
     #!/usr/bin/env bash
     set -euo pipefail
 
-    magick '{{ input }}' -rotate 0   '{{ LOGOSDIR }}/logo-uvt-tile-000.png'
-    magick '{{ input }}' -rotate 90  '{{ LOGOSDIR }}/logo-uvt-tile-090.png'
-    magick '{{ input }}' -rotate 180 '{{ LOGOSDIR }}/logo-uvt-tile-180.png'
-    magick '{{ input }}' -rotate 270 '{{ LOGOSDIR }}/logo-uvt-tile-270.png'
+    # extract the logo
+    qpdf '{{ input }}' --pages '{{ input }}' '{{ page }}' -- '{{ LOGOSDIR }}/logo-uvt.pdf'
+    pdfcrop --bbox '0 100 200 250' '{{ LOGOSDIR }}/logo-uvt.pdf' '{{ LOGOSDIR }}/logo-uvt-crop.pdf'
 
-    W=$(magick identify -format '%w' '{{ input }}')
-    H=$(magick identify -format '%h' '{{ input }}')
-    S=$((2*H + W))
-    HALF=$((H / 2))
+    # negate the colors (why is this so hard!?!)
+    inkscape --export-filename='{{ LOGOSDIR }}/logo-uvt.svg' '{{ LOGOSDIR }}/logo-uvt-crop.pdf'
+    sed -i 's/fill:#231f20/fill:#FFFFFF/g' '{{ LOGOSDIR }}/logo-uvt.svg'
+    inkscape --export-filename='{{ LOGOSDIR }}/logo-uvt-neg.pdf' \
+        --export-background-opacity=0 \
+        '{{ LOGOSDIR }}/logo-uvt.svg'
 
-    magick -size ${S}x${S} xc:none \
-        '{{ LOGOSDIR }}/logo-uvt-tile-000.png' -geometry +$((H + 32))+$((HALF + 56)) -composite \
-        '{{ LOGOSDIR }}/logo-uvt-tile-090.png' -geometry +28+$((H + 32)) -composite \
-        '{{ LOGOSDIR }}/logo-uvt-tile-270.png' -geometry +$((H + W - 28))+$((H - 32)) -composite \
-        '{{ LOGOSDIR }}/logo-uvt-tile-180.png' -geometry +$((H - 32))+$((H + W - HALF - 56)) -composite \
-        "{{ LOGOSDIR }}/$(basename {{ without_extension(output) }}).png"
-
-    magick -density 300 \
-        "{{ LOGOSDIR }}/$(basename {{ without_extension(output) }}).png" \
-        {{ output }}
+    # trim
+    pdfcrop --margins 0 '{{ LOGOSDIR }}/logo-uvt-neg.pdf' '{{ output }}'
 
 [private]
 logo_extract input output:
@@ -88,7 +91,7 @@ logo:
     unrar e -idq -o+ {{ LOGOSDIR }}/Logos.rar {{ LOGOSDIR }}/
     @just logo_background ro 14
     @just logo_background en 16
-    @just logo_tile '{{ LOGOSDIR }}/Asset 4@2x.png' 'assets/logo-uvt-tile.pdf'
+    @just logo_tile '{{ LOGOSDIR }}/Logo UVT - 2017.pdf' 16 'assets/logo-uvt-tile.pdf'
     @just logo_extract '{{ LOGOSDIR }}/Asset 4@2x.png' 'assets/logo-uvt'
 
 [doc("Update license text")]
@@ -113,3 +116,4 @@ clean:
 purge: clean
     rm -rf *.pdf template.png
     rm -rf assets/uvt-background-logo-*.png
+    rm -rf assets/uvt-background-tile.pdf

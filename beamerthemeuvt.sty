@@ -393,36 +393,11 @@
 
 % <<< background
 
-% NOTE: this is here as a performance hack: it embeds the logo in the PDF once and we
-% can then just reuse it to create the pattern lower down. It should be a lot faster.
-\pgfdeclareimage[width=1.5cm]{uvtlogo}{assets/logo-uvt-tile.pdf}
-
 \defbeamertemplate{background}{uvttitlepage}
 {
     \begin{tikzpicture}[remember picture, overlay]
-    % background
-    \fill[UVTBeamerDarkBlue] (current page.south west) rectangle (current page.north east);
-
-    % pattern
-    \begin{scope}[opacity=0.03]
-    \pgfmathsetmacro{\pw}{\paperwidth / 1cm}
-    \pgfmathsetmacro{\ph}{\paperheight / 1cm}
-
-    \foreach \y in {0.5, -1.0, ..., -\ph} {
-        \pgfmathsetmacro{\yeven}{\y}
-        \foreach \x in {0, 1.5, ..., \pw} {
-            \node[inner sep=0, anchor=north west]
-                at ([xshift=\x cm, yshift=\yeven cm]current page.north west)
-                {\pgfuseimage{uvtlogo}};
-        }
-        \pgfmathsetmacro{\yodd}{\y - 0.75}
-        \foreach \x in {-0.85, 0.65, 2.15, ..., \pw} {
-            \node[inner sep=0, anchor=north west]
-                at ([xshift=\x cm, yshift=\yodd cm]current page.north west)
-                {\pgfuseimage{uvtlogo}};
-        }
-    }
-    \end{scope}
+    \node[inner sep=0, anchor=north west] at (current page.north west)
+        {\includegraphics{assets/uvt-background-tile}};
 
     % top-left logo
     \fill[UVTWhite]
