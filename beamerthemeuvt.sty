@@ -25,7 +25,6 @@
 
 % <<< options
 
-\RequirePackage{ifthen}
 \RequirePackage{kvoptions}
 \SetupKeyvalOptions{
     family=uvt,
@@ -115,18 +114,19 @@
 
 % <<< assets
 
-\ifthenelse{\equal{\uvt@language}{english}}{
+\def\uvt@tmp@english{english}
+\def\uvt@tmp@romanian{romanian}
+\ifx\uvt@language\uvt@tmp@english
     \ProvideDocumentCommand \PageWord {} {Page}
     \venue{West University of Timișoara}
     \uvtslidelogo{\includegraphics[width=0.55\paperheight]{assets/uvt-background-logo-black-en}}
-}{
-\ifthenelse{\equal{\uvt@language}{romanian}}{
+\else\ifx\uvt@language\uvt@tmp@romanian
     \ProvideDocumentCommand \PageWord {} {Pagina}
     \venue{Universitatea de Vest din Timișoara}
     \uvtslidelogo{\includegraphics[width=0.55\paperheight]{assets/uvt-background-logo-black-ro}}
-}{
+\else
     \PackageError{beamerthemeuvt}{Unknown language `\uvt@language`}{}
-}}
+\fi\fi
 
 % >>>
 
