@@ -307,8 +307,6 @@
 
 % <<< templates
 
-\setbeamertemplate{background}[uvtslide]
-
 \NewDocumentCommand \titleframe {} {
     \setbeamertemplate{title page}[uvttitlepage]
     \setbeamertemplate{background}[uvttitlepage]
@@ -422,6 +420,7 @@
         \node [opacity=0.0175] at (current page.center) {\uvt@slidelogo};
     \end{tikzpicture}
 }
+\setbeamertemplate{background}[uvtslide]
 
 % >>>
 
