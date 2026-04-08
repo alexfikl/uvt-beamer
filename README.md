@@ -38,6 +38,7 @@ The package defines the following options used as `\usetheme[opts]{uvt}`.
 | :-                                | :-                                    |
 | `helveticanow`                    | Attempt to load the the *Helvetica Now Display* fonts |
 | `progressbar`                     | Adds a fancy progress bar to the header |
+| `sectiontoc`                      | Add full Table of Contents on section slides |
 | `language=<lang>`                 | One of *english* or *romanian*        |
 | `showframe`                       | Shows a frame around page elements (margins, etc.) |
 | `layoutgrid`                      | Adds a debug grid to check alignment  |
