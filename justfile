@@ -20,7 +20,7 @@ preview: template
     magick \
         -verbose \
         -density 300 \
-        template.pdf[0-5,16-17] \
+        template.pdf[0-5,16,18] \
         -quality 100 \
         -sharpen 0x1.0 \
         '{{ TEXOUTDIR }}/template-%02d.png'
