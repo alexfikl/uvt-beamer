@@ -72,6 +72,15 @@ keep in mind that would work well. For example: Carlito (a Calibri clone),
 Caladea (a Cambria clone), Montserrat (inspired by Gotham), Adobe Source Sans,
 and many others. A nice font will always make your slides look nicer!
 
+## Acknowledgements
+
+Some theme elements were heavily inspired (if not outright copied) from other
+cool themes. The progress bar is inspired by
+[minflat-beamer](https://github.com/vipowueb/minflat-beamer). Some of the block
+theming is taken from
+[amurmaple](https://gitlab.gutenberg-asso.fr/mchupin/amurmaple). You should
+check them out if you need a fancy and clean template for your presentations.
+
 ## License
 
 Creative Commons Attribution 4.0 International
