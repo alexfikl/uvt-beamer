@@ -72,6 +72,24 @@ keep in mind that would work well. For example: Carlito (a Calibri clone),
 Caladea (a Cambria clone), Montserrat (inspired by Gotham), Adobe Source Sans,
 and many others. A nice font will always make your slides look nicer!
 
+## Logos
+
+The logos used by this template are automatically generated from the logo
+package found on [the official website](https://dci.uvt.ro/identitate-vizuala/).
+This should give you an archive that you can put in `logos.out/Logos.rar` and then
+run
+```bash
+just logo
+just background_tile
+```
+to generate the logos used in the template (header logos and background slide logos)
+and the background used in the title and section pages. You can tweak these, if
+needed to change the colors, etc.
+
+To use a department logo in the template, you can check out the [UVT Letterhead
+Template](https://github.com/alexfikl/uvt-letterhead), which has a lot more
+logos in the `assets` folder.
+
 ## Acknowledgements
 
 Some theme elements were heavily inspired (if not outright copied) from other
