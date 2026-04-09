@@ -50,10 +50,6 @@ logo_background lang page:
     magick -density 300 \
         {{ LOGOSDIR }}/uvt-background-logo-black-{{ lang }}-crop.pdf \
         assets/uvt-background-logo-black-{{ lang }}.png
-    magick \
-        assets/uvt-background-logo-black-{{ lang }}.png \
-        -channel RGB -negate +channel \
-        assets/uvt-background-logo-white-{{ lang }}.png
 
 [private]
 logo_tile input page output:
