@@ -229,14 +229,14 @@
             ([xshift=2.25cm, yshift=\uvt@pboffset]current page.north west)
             rectangle
             ([xshift=-0.5cm,
-              yshift=\dimexpr\uvt@pboffset-1.5pt\relax]current page.north east);
+              yshift=\dimexpr\uvt@pboffset-1pt\relax]current page.north east);
         % filled progress portion
         \usebeamercolor{progress bar progress}%
         \fill[fg]
             ([xshift=2.25cm, yshift=\uvt@pboffset]current page.north west)
             rectangle
             ([xshift=\dimexpr2.25cm+(\paperwidth-2.75cm)*\thepage/\beamer@endpageofdocument\relax,%
-              yshift=\dimexpr\uvt@pboffset-1.5pt\relax]current page.north west);
+              yshift=\dimexpr\uvt@pboffset-1pt\relax]current page.north west);
         % section dots
         \uvt@sectionmarkers%
     \end{tikzpicture}%
