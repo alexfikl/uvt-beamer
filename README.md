@@ -52,6 +52,18 @@ but care must be taken to size them nicely.
 | `\uvtslidelogo`                   | Transparent logo used as background on slides |
 | `\venue`                          | Venue name (for the presentation) in footer |
 
+The standard branding colors are given below.
+
+| Color                             | RGB
+| :-                                | :-
+| `UVTDarkBlue`                     | ![#033A89](https://placehold.co/15x15/033A89/033A89.png) `(3, 58, 137)`   |
+| `UVTSkyBlue`                      | ![#2588E7](https://placehold.co/15x15/2588E7/2588E7.png) `(37, 136, 231)` |
+| `UVTLightBlue`                    | ![#AED9F8](https://placehold.co/15x15/AED9F8/AED9F8.png) `(174, 217, 248)` |
+| `UVTBlack`                        | ![#121212](https://placehold.co/15x15/121212/121212.png) `(18, 18, 18)` |
+| `UVTAccentWhite`                  | ![#FCF5F7](https://placehold.co/15x15/FCF5F7/FCF5F7.png) `(252, 245, 247)` |
+| `UVTWhite`                        | ![#FFFFFF](https://placehold.co/15x15/FFFFFF/FFFFFF.png) `(255, 255, 255)` |
+| `UVTYellow`                       | ![#E3AB23](https://placehold.co/15x15/E3AB23/E3AB23.png) `(228, 172, 36)` |
+
 ## Fonts
 
 Note that the Official Manual recommends the [Helvetica Display
