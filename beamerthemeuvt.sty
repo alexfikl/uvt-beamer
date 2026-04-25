@@ -168,7 +168,7 @@
 \setbeamerfont{section title}{size=\LARGE, series=\bfseries}
 
 \setbeamerfont{venue in header}{size*={8}{9.6}, series=\bfseries}
-\setbeamerfont{text in footer}{size*={8}{9.6}, series=\bfseries}
+\setbeamerfont{text in footer}{size*={6}{7.2}, series=\bfseries}
 
 \setbeamerfont{footnote}{size=\tiny}
 
@@ -273,17 +273,21 @@
 
 \defbeamertemplate{footline}{uvtframe}{
     \begin{tikzpicture}[remember picture, overlay]
-    \fill[UVTBeamerDarkBlue]
+    \fill[UVTAccentWhite]
         (current page.south west)
         rectangle
         ([yshift=0.4cm]current page.south east);
-    \fill[UVTBeamerDarkGray]
-        ([yshift=0.4cm]current page.south west)
+    \fill[UVTBeamerLightGray]
+        ([yshift=0.40cm]current page.south west)
         rectangle
-        ([yshift=0.45cm]current page.south east);
+        ([yshift=0.42cm]current page.south east);
+    \fill[UVTBeamerDarkGray]
+        ([yshift=0.42cm]current page.south west)
+        rectangle
+        ([yshift=0.43cm]current page.south east);
     \end{tikzpicture}%
     \begin{beamercolorbox}[wd=0.8\paperwidth, ht=0.45cm, dp=0pt, left]{text in footer}%
-        \vbox to 0.3cm{\vfil
+        \vbox to 0.35cm{\vfil
             \hspace{\beamer@leftmargin}%
             \usebeamerfont{text in footer}%
             \insertshortauthor ~~~---~~ \uvt@venueupper%
@@ -291,7 +295,7 @@
     \end{beamercolorbox}%
     \begin{beamercolorbox}[wd=0.2\paperwidth, ht=0.45cm, dp=0pt, right,
                            rightskip=\beamer@leftmargin]{text in footer}%
-        \vbox to 0.3cm{\vfil
+        \vbox to 0.35cm{\vfil
             \usebeamerfont{text in footer}%
             \PageWord{} \insertframenumber~/~\inserttotalframenumber%
         \vfil}%
