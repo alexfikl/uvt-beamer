@@ -218,22 +218,20 @@
         \uvt@progressbar
     \fi
     \end{tikzpicture}%
-    % frametitle
+    % frametitle — vertically centred to the 1.5cm logo height
     \hbox to \paperwidth{%
         \hskip 1.75cm\relax
-        \vbox to \dimexpr1.0cm + \dp\strutbox\relax{%
-            \vss
+        \vbox to 1.75cm{%
+            \vfil
             \ifx\insertframesubtitle\empty
-                {\usebeamerfont{frametitle}\usebeamercolor[fg]{frametitle}\insertframetitle\strut\par}
-                \vskip -4.25mm
+                {\usebeamerfont{frametitle}\usebeamercolor[fg]{frametitle}\insertframetitle\strut\par}%
             \else
-                {\usebeamerfont{frametitle}\usebeamercolor[fg]{frametitle}\insertframetitle} \\
-                {\usebeamerfont{framesubtitle}\usebeamercolor[fg]{framesubtitle}\insertframesubtitle\strut\par}
-                \vskip -4mm
+                {\usebeamerfont{frametitle}\usebeamercolor[fg]{frametitle}\insertframetitle\par}%
+                {\usebeamerfont{framesubtitle}\usebeamercolor[fg]{framesubtitle}\insertframesubtitle\strut\par}%
             \fi
-        }
-    }
-    \vskip\dimexpr0.15cm + \dp\strutbox\relax
+            \vfil
+        }%
+    }%
 }
 
 \defbeamertemplate{footline}{uvtframe}{
