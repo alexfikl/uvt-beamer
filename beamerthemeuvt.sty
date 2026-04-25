@@ -188,58 +188,19 @@
 
 % <<< outer: header / footer
 
-\newdimen\uvt@pbmarkerxshift
-\def\uvt@pbmarkeryshift{-0.275cm}
-\def\uvt@pboffset{-0.24cm}
-
-\def\uvt@sectionmarkers{%
-    \def\sectionentry##1##2##3##4##5{}%
-    \def\slideentry##1##2##3##4##5##6{}%
-    \def\beamer@subsectionentry##1##2##3##4##5{}%
-    \dohead%
-    \def\sectionentry##1##2##3##4##5{%
-        \ifnum##5=\c@part\relax
-            \uvt@pbmarkerxshift=\dimexpr2.25cm+(\paperwidth-2.75cm)*(##3+1)/\beamer@endpageofdocument\relax%
-            \usebeamercolor{progress bar section dot}%
-            \ifnum\c@section=##1\relax
-                \draw[draw=bg, fill=bg]
-                    ([xshift=\uvt@pbmarkerxshift, yshift=\uvt@pbmarkeryshift]current page.north west)
-                    circle [radius=5pt];
-                \draw[draw=fg, fill=fg]
-                    ([xshift=\uvt@pbmarkerxshift, yshift=\uvt@pbmarkeryshift]current page.north west)
-                    circle [radius=3pt];
-            \else
-                \draw[draw=bg, fill=bg]
-                    ([xshift=\uvt@pbmarkerxshift, yshift=\uvt@pbmarkeryshift]current page.north west)
-                    circle [radius=5pt];
-                \draw[draw=fg, fill=bg, thick]
-                    ([xshift=\uvt@pbmarkerxshift, yshift=\uvt@pbmarkeryshift]current page.north west)
-                    circle [radius=3pt];
-            \fi
-        \fi
-    }%
-    \dohead%
-}
-
-\defbeamertemplate{headline}{uvtprogressbar}{%
-    \begin{tikzpicture}[remember picture, overlay]
-        % background track
-        \usebeamercolor{progress bar}%
-        \fill[fg]
-            ([xshift=2.25cm, yshift=\uvt@pboffset]current page.north west)
-            rectangle
-            ([xshift=-0.5cm,
-              yshift=\dimexpr\uvt@pboffset-1pt\relax]current page.north east);
-        % filled progress portion
-        \usebeamercolor{progress bar progress}%
-        \fill[fg]
-            ([xshift=2.25cm, yshift=\uvt@pboffset]current page.north west)
-            rectangle
-            ([xshift=\dimexpr2.25cm+(\paperwidth-2.75cm)*\thepage/\beamer@endpageofdocument\relax,%
-              yshift=\dimexpr\uvt@pboffset-1pt\relax]current page.north west);
-        % section dots
-        \uvt@sectionmarkers%
-    \end{tikzpicture}%
+\newlength{\uvt@progressbarwidth}
+\def\uvt@progressbar{
+    \uvt@progressbarwidth=\paperwidth
+    \multiply\uvt@progressbarwidth by \insertframenumber
+    \divide\uvt@progressbarwidth by \inserttotalframenumber
+    \fill[UVTBeamerLightGray, anchor=west]
+        ([yshift=-2pt]current page.north west)
+        rectangle
+        ([xshift=\paperwidth]current page.north west);
+    \fill[UVTBeamerYellow, anchor=west, rounded corners=1.5pt]
+        ([xshift=-2pt, yshift=-2pt]current page.north west)
+        rectangle
+        ([xshift=\uvt@progressbarwidth]current page.north west);
 }
 
 \defbeamertemplate*{frametitle}{uvtframe}{
@@ -252,6 +213,10 @@
         ([xshift=2cm, yshift=0cm]current page.north west);
     \node at ([xshift=1.25cm, yshift=-0.75cm]current page.north west)
         {\includegraphics[width=1.5cm]{assets/logo-uvt-white}};
+    % progress bar (drawn after logo so it appears on top)
+    \ifuvt@progressbar
+        \uvt@progressbar
+    \fi
     \end{tikzpicture}%
     % frametitle
     \hbox to \paperwidth{%
@@ -410,6 +375,10 @@
         ([xshift=2cm, yshift=0cm]current page.north west);
     \node at ([xshift=1.25cm, yshift=-0.75cm]current page.north west)
         {\includegraphics[width=1.5cm]{assets/logo-uvt-blue}};
+    % progress bar (drawn after logo so it appears on top)
+    \ifuvt@progressbar
+        \uvt@progressbar
+    \fi
     \end{tikzpicture}%
 }
 
