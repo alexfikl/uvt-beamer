@@ -188,21 +188,6 @@
 
 % <<< outer: header / footer
 
-\newlength{\uvt@progressbarwidth}
-\def\uvt@progressbar{
-    \uvt@progressbarwidth=\paperwidth
-    \multiply\uvt@progressbarwidth by \insertframenumber
-    \divide\uvt@progressbarwidth by \inserttotalframenumber
-    \fill[UVTBeamerLightGray, anchor=west]
-        ([yshift=-2pt]current page.north west)
-        rectangle
-        ([xshift=\paperwidth]current page.north west);
-    \fill[UVTBeamerYellow, anchor=west, rounded corners=1.5pt]
-        ([xshift=-2pt, yshift=-2pt]current page.north west)
-        rectangle
-        ([xshift=\uvt@progressbarwidth]current page.north west);
-}
-
 \defbeamertemplate*{frametitle}{uvtframe}{
     \nointerlineskip%
     \begin{tikzpicture}[remember picture, overlay]
@@ -213,10 +198,6 @@
         ([xshift=2cm, yshift=0cm]current page.north west);
     \node at ([xshift=1.25cm, yshift=-0.75cm]current page.north west)
         {\includegraphics[width=1.5cm]{assets/logo-uvt-white}};
-    % progress bar (drawn after logo so it appears on top)
-    \ifuvt@progressbar
-        \uvt@progressbar
-    \fi
     \end{tikzpicture}%
     % frametitle — vertically centred to the 1.5cm logo height
     \hbox to \paperwidth{%
@@ -234,20 +215,26 @@
     }%
 }
 
+\newlength{\uvt@progressbarwidth}
+
 \defbeamertemplate{footline}{uvtframe}{
     \begin{tikzpicture}[remember picture, overlay]
+    \uvt@progressbarwidth=\paperwidth
+    \multiply\uvt@progressbarwidth by \insertframenumber
+    \divide\uvt@progressbarwidth by \inserttotalframenumber
+
     \fill[UVTAccentWhite]
         (current page.south west)
         rectangle
         ([yshift=0.4cm]current page.south east);
     \fill[UVTBeamerLightGray]
+        (current page.south west)
+        rectangle
+        ([xshift=\uvt@progressbarwidth, yshift=0.4cm]current page.south west);
+    \fill[UVTBeamerDarkGray]
         ([yshift=0.40cm]current page.south west)
         rectangle
         ([yshift=0.42cm]current page.south east);
-    \fill[UVTBeamerDarkGray]
-        ([yshift=0.42cm]current page.south west)
-        rectangle
-        ([yshift=0.43cm]current page.south east);
     \end{tikzpicture}%
     \begin{beamercolorbox}[wd=0.8\paperwidth, ht=0.45cm, dp=0pt, left]{text in footer}%
         \vbox to 0.35cm{\vfil
@@ -265,10 +252,6 @@
     \end{beamercolorbox}%
 }
 \setbeamertemplate{footline}[uvtframe]
-
-\ifuvt@progressbar
-    \setbeamertemplate{headline}[uvtprogressbar]
-\fi
 
 % >>>
 
@@ -373,10 +356,6 @@
         ([xshift=2cm, yshift=0cm]current page.north west);
     \node at ([xshift=1.25cm, yshift=-0.75cm]current page.north west)
         {\includegraphics[width=1.5cm]{assets/logo-uvt-blue}};
-    % progress bar (drawn after logo so it appears on top)
-    \ifuvt@progressbar
-        \uvt@progressbar
-    \fi
     \end{tikzpicture}%
 }
 
