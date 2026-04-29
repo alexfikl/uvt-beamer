@@ -63,7 +63,7 @@ used in this template and taken from the official documents.
 | `UVTBlack`                        | ![#121212](https://placehold.co/15x15/121212/121212.png) `(18, 18, 18)` |
 | `UVTAccentWhite`                  | ![#FCF5F7](https://placehold.co/15x15/FCF5F7/FCF5F7.png) `(252, 245, 247)` |
 | `UVTWhite`                        | ![#FFFFFF](https://placehold.co/15x15/FFFFFF/FFFFFF.png) `(255, 255, 255)` |
-| `UVTYellow`                       | ![#E3AB23](https://placehold.co/15x15/E3AB23/E3AB23.png) `(228, 172, 36)` |
+| `UVTBeamerYellow`                 | ![#E3AB23](https://placehold.co/15x15/E3AB23/E3AB23.png) `(228, 172, 36)` |
 | `UVTBeamerDarkBlue`               | ![#002561](https://placehold.co/15x15/002561/002561.png) `(0, 37, 97)` |
 | `UVTBeamerDarkGray`               | ![#A6A6A6](https://placehold.co/15x15/A6A6A6/A6A6A6.png) `(166, 166, 166)` |
 
