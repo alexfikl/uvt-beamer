@@ -37,7 +37,7 @@ The package defines the following options used as `\usetheme[opts]{uvt}`.
 | Option                            | Description                           |
 | :-                                | :-                                    |
 | `helveticanow`                    | Attempt to load the the *Helvetica Now Display* fonts |
-| `progressbar`                     | Adds a fancy progress bar to the header |
+| `progressbar`                     | Adds a simple progress bar to the footer |
 | `sectiontoc`                      | Add full Table of Contents on section slides |
 | `language=<lang>`                 | One of *english* or *romanian*        |
 | `showframe`                       | [DEBUG] Shows a frame around page elements (margins, etc.) |
@@ -108,9 +108,7 @@ logos in the `assets` folder.
 ## Acknowledgements
 
 Some theme elements were heavily inspired (if not outright copied) from other
-cool themes. The progress bar is inspired by
-[minflat-beamer](https://github.com/vipowueb/minflat-beamer). Some of the block
-theming is taken from
+cool themes. Some of the block theming is taken from
 [amurmaple](https://gitlab.gutenberg-asso.fr/mchupin/amurmaple). You should
 check them out if you need a fancy and clean template for your presentations.
 
