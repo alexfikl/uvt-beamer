@@ -16,9 +16,10 @@ As the example in the official branding manual is not very friendly to scientifi
 presentations, this theme will probably take some liberties with it.
 
 Templates in the same series:
-* [UVT Letterhead Template](https://github.com/alexfikl/uvt-letterhead)
-* [UVT Beamer Presentation Template](https://github.com/alexfikl/uvt-beamer)
-* [UVT Conference Poster Template](https://github.com/alexfikl/uvt-poster)
+
+- [UVT Letterhead Template](https://github.com/alexfikl/uvt-letterhead)
+- [UVT Beamer Presentation Template](https://github.com/alexfikl/uvt-beamer)
+- [UVT Conference Poster Template](https://github.com/alexfikl/uvt-poster)
 
 ## What it Looks Like
 
@@ -34,38 +35,38 @@ few useful options and examples. The `template.tex` can then be built with
 
 The package defines the following options used as `\usetheme[opts]{uvt}`.
 
-| Option                            | Description                           |
-| :-                                | :-                                    |
-| `helveticanow`                    | Attempt to load the the *Helvetica Now Display* fonts |
-| `progressbar`                     | Adds a simple progress bar to the footer |
-| `sectiontoc`                      | Add full Table of Contents on section slides |
-| `language=<lang>`                 | One of *english* or *romanian*        |
-| `showframe`                       | [DEBUG] Shows a frame around page elements (margins, etc.) |
-| `layoutgrid`                      | [DEBUG] Adds a debug grid to check alignment  |
+| Option            | Description                                                |
+| :---------------- | :--------------------------------------------------------- |
+| `helveticanow`    | Attempt to load the the *Helvetica Now Display* fonts      |
+| `progressbar`     | Adds a simple progress bar to the footer                   |
+| `sectiontoc`      | Add full Table of Contents on section slides               |
+| `language=<lang>` | One of *english* or *romanian*                             |
+| `showframe`       | [DEBUG] Shows a frame around page elements (margins, etc.) |
+| `layoutgrid`      | [DEBUG] Adds a debug grid to check alignment               |
 
 The `language` is used to automatically select the logos with appropriate text.
 This can be avoided by providing your own logos using the following commands,
 but care must be taken to size them nicely.
 
-| Macro                             | Description                           |
-| :-                                | :-                                    |
-| `\uvtslidelogo`                   | Transparent logo used as background on slides |
-| `\venue`                          | Venue name (for the presentation) in footer |
+| Macro           | Description                                   |
+| :-------------- | :-------------------------------------------- |
+| `\uvtslidelogo` | Transparent logo used as background on slides |
+| `\venue`        | Venue name (for the presentation) in footer   |
 
 The standard branding colors are given below. The `UVTBeamer` colors are exclusively
 used in this template and taken from the official documents.
 
-| Color                             | RGB
-| :-                                | :-
-| `UVTDarkBlue`                     | ![#033A89](https://placehold.co/15x15/033A89/033A89.png) `(3, 58, 137)`   |
-| `UVTSkyBlue`                      | ![#2588E7](https://placehold.co/15x15/2588E7/2588E7.png) `(37, 136, 231)` |
-| `UVTLightBlue`                    | ![#AED9F8](https://placehold.co/15x15/AED9F8/AED9F8.png) `(174, 217, 248)` |
-| `UVTBlack`                        | ![#121212](https://placehold.co/15x15/121212/121212.png) `(18, 18, 18)` |
-| `UVTAccentWhite`                  | ![#FCF5F7](https://placehold.co/15x15/FCF5F7/FCF5F7.png) `(252, 245, 247)` |
-| `UVTWhite`                        | ![#FFFFFF](https://placehold.co/15x15/FFFFFF/FFFFFF.png) `(255, 255, 255)` |
-| `UVTBeamerYellow`                 | ![#E3AB23](https://placehold.co/15x15/E3AB23/E3AB23.png) `(228, 172, 36)` |
-| `UVTBeamerDarkBlue`               | ![#002561](https://placehold.co/15x15/002561/002561.png) `(0, 37, 97)` |
-| `UVTBeamerDarkGray`               | ![#A6A6A6](https://placehold.co/15x15/A6A6A6/A6A6A6.png) `(166, 166, 166)` |
+| Color               | RGB                                                                        |
+| :------------------ | :------------------------------------------------------------------------- |
+| `UVTDarkBlue`       | ![#033A89](https://placehold.co/15x15/033A89/033A89.png) `(3, 58, 137)`    |
+| `UVTSkyBlue`        | ![#2588E7](https://placehold.co/15x15/2588E7/2588E7.png) `(37, 136, 231)`  |
+| `UVTLightBlue`      | ![#AED9F8](https://placehold.co/15x15/AED9F8/AED9F8.png) `(174, 217, 248)` |
+| `UVTBlack`          | ![#121212](https://placehold.co/15x15/121212/121212.png) `(18, 18, 18)`    |
+| `UVTAccentWhite`    | ![#FCF5F7](https://placehold.co/15x15/FCF5F7/FCF5F7.png) `(252, 245, 247)` |
+| `UVTWhite`          | ![#FFFFFF](https://placehold.co/15x15/FFFFFF/FFFFFF.png) `(255, 255, 255)` |
+| `UVTBeamerYellow`   | ![#E3AB23](https://placehold.co/15x15/E3AB23/E3AB23.png) `(228, 172, 36)`  |
+| `UVTBeamerDarkBlue` | ![#002561](https://placehold.co/15x15/002561/002561.png) `(0, 37, 97)`     |
+| `UVTBeamerDarkGray` | ![#A6A6A6](https://placehold.co/15x15/A6A6A6/A6A6A6.png) `(166, 166, 166)` |
 
 ## Fonts
 
@@ -93,10 +94,12 @@ The logos used by this template are automatically generated from the logo
 package found on [the official website](https://dci.uvt.ro/identitate-vizuala/).
 This should give you an archive that you can put in `logos.out/Logos.rar` and then
 run
+
 ```bash
 just logo
 just background_tile
 ```
+
 to generate the logos used in the template (header logos and background slide logos)
 and the background used in the title and section pages. You can tweak these, if
 needed to change the colors, etc.

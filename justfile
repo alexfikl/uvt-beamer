@@ -6,6 +6,8 @@ LOGOSDIR := "logos.out"
 _default:
     @just --list
 
+# {{{ pdf
+
 [private]
 pdf basename:
     {{ TEXMK }} {{ TEXFLAGS }} {{ basename }}.tex
@@ -28,6 +30,10 @@ preview: template
         -border 1 -tile 2x4 -geometry 1000x \
         template.png
 
+# }}}
+
+# {{{ assets
+
 [doc("Rebuild assets")]
 assets: logo background_tile
 
@@ -39,7 +45,6 @@ background_tile:
     cd assets
     {{ TEXMK }} -pdflua -output-directory=../{{ TEXOUTDIR }} uvt-background-tile.tex
     cp ../{{ TEXOUTDIR }}/uvt-background-tile.pdf uvt-background-tile.pdf
-
 
 [private]
 logo_background lang page:
@@ -90,6 +95,50 @@ logo:
     @just logo_tile '{{ LOGOSDIR }}/Logo UVT - 2017.pdf' 16 'assets/logo-uvt-tile.pdf'
     @just logo_extract '{{ LOGOSDIR }}/Asset 4@2x.png' 'assets/logo-uvt'
 
+# }}}
+
+# {{{ lint
+
+[doc("Format source files")]
+format: yamlfmt mdformat justfmt
+
+[doc("Format tex files with badness")]
+texfmt:
+    badness format template.tex uvt-letterhead.sty
+    @echo -e "\e[1;32mbadness clean!\e[0m"
+
+[doc("Format YAML files with yamlfmt")]
+yamlfmt:
+    yamlfmt -gitignore_excludes .
+    @echo -e "\e[1;32myamlfmt clean!\e[0m"
+
+[doc("Format markdown files with mdformat")]
+mdformat:
+    python -m mdformat .
+    @echo -e "\e[1;32mmdformat clean!\e[0m"
+
+[doc("Run just --fmt over the justfile")]
+justfmt:
+    just --unstable --fmt
+    @echo -e "\e[1;32mjust --fmt clean!\e[0m"
+
+[doc("Run all linting checks over the source code")]
+lint: typos badness
+
+[doc("Check for typos (using typos)")]
+typos:
+    typos --sort --files --config typos.toml
+    @echo -e "\e[1;32mtypos clean!\e[0m"
+
+[doc("Lint using badness")]
+badness:
+    badness lint template.tex uvt-letterhead.sty
+    @echo -e "\e[1;32mbadness clean!\e[0m"
+
+# }}}
+
+# {{{ develop
+
 [doc("Update license text")]
 license:
     python -m reuse download CC-BY-4.0
@@ -113,3 +162,5 @@ purge: clean
     rm -rf *.pdf template.png
     rm -rf assets/uvt-background-logo-*.png
     rm -rf assets/uvt-background-tile.pdf
+
+# }}}
