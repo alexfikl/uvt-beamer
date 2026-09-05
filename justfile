@@ -104,7 +104,9 @@ format: yamlfmt mdformat justfmt
 
 [doc("Format tex files with badness")]
 texfmt:
-    badness format template.tex uvt-letterhead.sty
+    badness format \
+        --wrap stable --math-wrap preserve --indent-width 4 \
+        template.tex beamercolorthemeuvt.sty beamerthemeuvt.sty
     @echo -e "\e[1;32mbadness clean!\e[0m"
 
 [doc("Format YAML files with yamlfmt")]
